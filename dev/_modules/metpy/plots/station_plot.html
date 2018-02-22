@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>metpy.plots.station_plot &mdash; MetPy 0.6</title>
+  <title>metpy.plots.station_plot &mdash; MetPy 0.7</title>
   
 
   
@@ -43,7 +43,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="MetPy 0.6" href="../../../index.html"/>
+    <link rel="top" title="MetPy 0.7" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -79,7 +79,7 @@
                 
                   <div class="version-dropdown">
                     <select class="version-list" id="version-list">
-                      <option value=''>0.6</option>
+                      <option value=''>0.7</option>
                       
                         
                           <option value="../latest">latest</option>
@@ -256,8 +256,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span> <span class="o">=</span> <span class="n">fontsize</span> <span class="k">if</span> <span class="n">spacing</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">spacing</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">transform</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">barbs</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">default_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">barbs</span> <span class="o">=</span> <span class="kc">None</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
 
 <div class="viewcode-block" id="StationPlot.plot_symbol"><a class="viewcode-back" href="../../../api/generated/metpy.plots.StationPlot.html#metpy.plots.StationPlot.plot_symbol">[docs]</a>    <span class="k">def</span> <span class="nf">plot_symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">codes</span><span class="p">,</span> <span class="n">symbol_mapper</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;At the specified location in the station model plot a set of symbols.</span>
@@ -350,8 +350,8 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Make sure we use our font for symbols</span>
-        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;fontproperties&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">wx_symbol_font</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot_parameter</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">codes</span><span class="p">,</span> <span class="n">symbol_mapper</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;fontproperties&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">wx_symbol_font</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot_parameter</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">codes</span><span class="p">,</span> <span class="n">symbol_mapper</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="StationPlot.plot_parameter"><a class="viewcode-back" href="../../../api/generated/metpy.plots.StationPlot.html#metpy.plots.StationPlot.plot_parameter">[docs]</a>    <span class="k">def</span> <span class="nf">plot_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">formatter</span><span class="o">=</span><span class="s1">&#39;.0f&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;At the specified location in the station model plot a set of values.</span>
@@ -386,8 +386,8 @@
 <span class="sd">        plot_barb, plot_symbol, plot_text</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_string_list</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">formatter</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot_text</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_string_list</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">formatter</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot_text</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="StationPlot.plot_text"><a class="viewcode-back" href="../../../api/generated/metpy.plots.StationPlot.html#metpy.plots.StationPlot.plot_text">[docs]</a>    <span class="k">def</span> <span class="nf">plot_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;At the specified location in the station model plot a collection of text.</span>
@@ -425,8 +425,8 @@
                                               <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">location</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">location</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">location</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_collection</span>
-        <span class="k">return</span> <span class="n">text_collection</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">location</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_collection</span></div>
+        <span class="k">return</span> <span class="n">text_collection</span>
 
 <div class="viewcode-block" id="StationPlot.plot_barb"><a class="viewcode-back" href="../../../api/generated/metpy.plots.StationPlot.html#metpy.plots.StationPlot.plot_barb">[docs]</a>    <span class="k">def</span> <span class="nf">plot_barb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;At the center of the station model plot wind barbs.</span>
@@ -479,8 +479,8 @@
 
             <span class="c1"># Since we&#39;ve re-implemented CartoPy&#39;s barbs, we need to skip calling it here</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">barbs</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">Axes</span><span class="o">.</span><span class="n">barbs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">defaults</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">barbs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">barbs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">defaults</span><span class="p">)</span></div>
+        <span class="k">else</span><span class="p">:</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">barbs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">barbs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">defaults</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_make_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Assemble kwargs as necessary.</span>
@@ -515,8 +515,8 @@
         <span class="sd">&quot;&quot;&quot;Process locations to get a consistent set of tuples for location.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">is_string_like</span><span class="p">(</span><span class="n">location</span><span class="p">):</span>
             <span class="n">location</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">location_names</span><span class="p">[</span><span class="n">location</span><span class="p">]</span>
-        <span class="n">xoff</span><span class="p">,</span> <span class="n">yoff</span> <span class="o">=</span> <span class="n">location</span>
-        <span class="k">return</span> <span class="n">xoff</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">,</span> <span class="n">yoff</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span></div>
+        <span class="n">xoff</span><span class="p">,</span> <span class="n">yoff</span> <span class="o">=</span> <span class="n">location</span></div>
+        <span class="k">return</span> <span class="n">xoff</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">,</span> <span class="n">yoff</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span>
 
 
 <div class="viewcode-block" id="StationPlotLayout"><a class="viewcode-back" href="../../../api/generated/metpy.plots.StationPlotLayout.html#metpy.plots.StationPlotLayout">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -579,8 +579,8 @@
 <span class="sd">        --------</span>
 <span class="sd">        add_barb, add_symbol, add_text</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="p">[</span><span class="n">location</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PlotTypes</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+        <span class="bp">self</span><span class="p">[</span><span class="n">location</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PlotTypes</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span>
 
 <div class="viewcode-block" id="StationPlotLayout.add_symbol"><a class="viewcode-back" href="../../../api/generated/metpy.plots.StationPlotLayout.html#metpy.plots.StationPlotLayout.add_symbol">[docs]</a>    <span class="k">def</span> <span class="nf">add_symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">symbol_mapper</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Add a symbol to the station layout.</span>
@@ -612,8 +612,8 @@
 <span class="sd">        --------</span>
 <span class="sd">        add_barb, add_text, add_value</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="p">[</span><span class="n">location</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PlotTypes</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">symbol_mapper</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+        <span class="bp">self</span><span class="p">[</span><span class="n">location</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PlotTypes</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">symbol_mapper</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span>
 
 <div class="viewcode-block" id="StationPlotLayout.add_text"><a class="viewcode-back" href="../../../api/generated/metpy.plots.StationPlotLayout.html#metpy.plots.StationPlotLayout.add_text">[docs]</a>    <span class="k">def</span> <span class="nf">add_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Add a text field to the  station layout.</span>
@@ -641,8 +641,8 @@
 <span class="sd">        --------</span>
 <span class="sd">        add_barb, add_symbol, add_value</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="p">[</span><span class="n">location</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PlotTypes</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+        <span class="bp">self</span><span class="p">[</span><span class="n">location</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PlotTypes</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="StationPlotLayout.add_barb"><a class="viewcode-back" href="../../../api/generated/metpy.plots.StationPlotLayout.html#metpy.plots.StationPlotLayout.add_barb">[docs]</a>    <span class="k">def</span> <span class="nf">add_barb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_name</span><span class="p">,</span> <span class="n">v_name</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Add a wind barb to the center of the station layout.</span>
@@ -676,8 +676,8 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Not sure if putting the v_name as a plot-specific option is appropriate,</span>
-        <span class="c1"># but it seems simpler than making name code in plot handle tuples</span>
-        <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;barb&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PlotTypes</span><span class="o">.</span><span class="n">barb</span><span class="p">,</span> <span class="p">(</span><span class="n">u_name</span><span class="p">,</span> <span class="n">v_name</span><span class="p">),</span> <span class="p">(</span><span class="n">units</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span></div>
+        <span class="c1"># but it seems simpler than making name code in plot handle tuples</span></div>
+        <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;barb&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PlotTypes</span><span class="o">.</span><span class="n">barb</span><span class="p">,</span> <span class="p">(</span><span class="n">u_name</span><span class="p">,</span> <span class="n">v_name</span><span class="p">),</span> <span class="p">(</span><span class="n">units</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span>
 
 <div class="viewcode-block" id="StationPlotLayout.names"><a class="viewcode-back" href="../../../api/generated/metpy.plots.StationPlotLayout.html#metpy.plots.StationPlotLayout.names">[docs]</a>    <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the list of names used by the layout.</span>
@@ -693,8 +693,8 @@
             <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">PlotTypes</span><span class="o">.</span><span class="n">barb</span><span class="p">:</span>
                 <span class="n">ret</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">ret</span></div>
+                <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
+        <span class="k">return</span> <span class="n">ret</span>
 
 <div class="viewcode-block" id="StationPlotLayout.plot"><a class="viewcode-back" href="../../../api/generated/metpy.plots.StationPlotLayout.html#metpy.plots.StationPlotLayout.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plotter</span><span class="p">,</span> <span class="n">data_dict</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Plot a collection of data using this layout for a station plot.</span>
@@ -743,15 +743,15 @@
                     <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">PlotTypes</span><span class="o">.</span><span class="n">symbol</span><span class="p">:</span>
                         <span class="n">mapper</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="n">args</span>
                         <span class="n">plotter</span><span class="o">.</span><span class="n">plot_symbol</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">mapper</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-                    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">PlotTypes</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
-                        <span class="n">plotter</span><span class="o">.</span><span class="n">plot_text</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span></div>
+                    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">PlotTypes</span><span class="o">.</span><span class="n">text</span><span class="p">:</span></div>
+                        <span class="n">plotter</span><span class="o">.</span><span class="n">plot_text</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return string representation of layout.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="s1">&#39;{&#39;</span> <span class="o">+</span>
                 <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">: (</span><span class="si">{1[0].name}</span><span class="s1">, </span><span class="si">{1[1]}</span><span class="s1">, ...)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span>
-                          <span class="k">for</span> <span class="n">loc</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span> <span class="o">+</span>
-                <span class="s1">&#39;}&#39;</span><span class="p">)</span></div>
+                          <span class="k">for</span> <span class="n">loc</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span> <span class="o">+</span></div>
+                <span class="s1">&#39;}&#39;</span><span class="p">)</span>
 
 
 <span class="k">with</span> <span class="n">exporter</span><span class="p">:</span>
@@ -801,7 +801,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, MetPy Developers.
-      Last updated on Jan 04, 2018 at 19:17:05.
+      Last updated on Feb 22, 2018 at 17:33:12.
 
     </p>
   </div>
@@ -838,7 +838,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.6.1+116.gba13b4c',
+            VERSION:'0.7.0+56.g81d4479',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

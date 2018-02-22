@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>metpy.calc.thermo &mdash; MetPy 0.6</title>
+  <title>metpy.calc.thermo &mdash; MetPy 0.7</title>
   
 
   
@@ -43,7 +43,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="MetPy 0.6" href="../../../index.html"/>
+    <link rel="top" title="MetPy 0.7" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -79,7 +79,7 @@
                 
                   <div class="version-dropdown">
                     <select class="version-list" id="version-list">
-                      <option value=''>0.6</option>
+                      <option value=''>0.7</option>
                       
                         
                           <option value="../latest">latest</option>
@@ -203,7 +203,7 @@
 <span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">so</span>
 
 <span class="kn">from</span> <span class="nn">.tools</span> <span class="k">import</span> <span class="p">(</span><span class="n">_greater_or_close</span><span class="p">,</span> <span class="n">_less_or_close</span><span class="p">,</span> <span class="n">broadcast_indices</span><span class="p">,</span> <span class="n">find_intersections</span><span class="p">,</span>
-                    <span class="n">get_layer</span><span class="p">,</span> <span class="n">interp</span><span class="p">)</span>
+                    <span class="n">first_derivative</span><span class="p">,</span> <span class="n">get_layer</span><span class="p">,</span> <span class="n">interp</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">..constants</span> <span class="k">import</span> <span class="n">Cp_d</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">Lv</span><span class="p">,</span> <span class="n">P0</span><span class="p">,</span> <span class="n">Rd</span>
 <span class="kn">from</span> <span class="nn">..package_tools</span> <span class="k">import</span> <span class="n">Exporter</span>
 <span class="kn">from</span> <span class="nn">..units</span> <span class="k">import</span> <span class="n">atleast_1d</span><span class="p">,</span> <span class="n">check_units</span><span class="p">,</span> <span class="n">concatenate</span><span class="p">,</span> <span class="n">units</span>
@@ -239,8 +239,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">e</span> <span class="o">=</span> <span class="n">saturation_vapor_pressure</span><span class="p">(</span><span class="n">dewpt</span><span class="p">)</span>
-    <span class="n">e_s</span> <span class="o">=</span> <span class="n">saturation_vapor_pressure</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">e</span> <span class="o">/</span> <span class="n">e_s</span><span class="p">)</span></div>
+    <span class="n">e_s</span> <span class="o">=</span> <span class="n">saturation_vapor_pressure</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">e</span> <span class="o">/</span> <span class="n">e_s</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="potential_temperature"><a class="viewcode-back" href="../../../api/generated/metpy.calc.potential_temperature.html#metpy.calc.potential_temperature">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -280,8 +280,52 @@
 <span class="sd">    &gt;&gt;&gt; metpy.calc.potential_temperature(800. * units.mbar, 273. * units.kelvin)</span>
 <span class="sd">    &lt;Quantity(290.96653180346203, &#39;kelvin&#39;)&gt;</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">temperature</span> <span class="o">*</span> <span class="p">(</span><span class="n">P0</span> <span class="o">/</span> <span class="n">pressure</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span><span class="o">**</span><span class="n">kappa</span></div>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+    <span class="k">return</span> <span class="n">temperature</span> <span class="o">*</span> <span class="p">(</span><span class="n">P0</span> <span class="o">/</span> <span class="n">pressure</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span><span class="o">**</span><span class="n">kappa</span>
+
+
+<div class="viewcode-block" id="temperature_from_potential_temperature"><a class="viewcode-back" href="../../../api/generated/metpy.calc.temperature_from_potential_temperature.html#metpy.calc.temperature_from_potential_temperature">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
+<span class="nd">@check_units</span><span class="p">(</span><span class="s1">&#39;[pressure]&#39;</span><span class="p">,</span> <span class="s1">&#39;[temperature]&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">temperature_from_potential_temperature</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calculate the temperature from a given potential temperature.</span>
+
+<span class="sd">    Uses the inverse of the Poisson equation to calculate the temperature from a</span>
+<span class="sd">    given potential temperature at a specific pressure level.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pressure : `pint.Quantity`</span>
+<span class="sd">        The total atmospheric pressure</span>
+<span class="sd">    theta : `pint.Quantity`</span>
+<span class="sd">        The potential temperature</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    `pint.Quantity`</span>
+<span class="sd">        The temperature corresponding to the potential temperature and pressure.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    dry_lapse</span>
+<span class="sd">    potential_temperature</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Formula:</span>
+
+<span class="sd">    .. math:: T = \Theta (P / P_0)^\kappa</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from metpy.units import units</span>
+<span class="sd">    &gt;&gt;&gt; from metpy.calc import temperature_from_potential_temperature</span>
+<span class="sd">    &gt;&gt;&gt; # potential temperature</span>
+<span class="sd">    &gt;&gt;&gt; theta = np.array([ 286.12859679, 288.22362587]) * units.kelvin</span>
+<span class="sd">    &gt;&gt;&gt; p = 850 * units.mbar</span>
+<span class="sd">    &gt;&gt;&gt; T = temperature_from_potential_temperature(p,theta)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span></div>
+    <span class="k">return</span> <span class="n">theta</span> <span class="o">*</span> <span class="p">(</span><span class="n">pressure</span> <span class="o">/</span> <span class="n">P0</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span><span class="o">**</span><span class="n">kappa</span>
 
 
 <div class="viewcode-block" id="dry_lapse"><a class="viewcode-back" href="../../../api/generated/metpy.calc.dry_lapse.html#metpy.calc.dry_lapse">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -312,8 +356,8 @@
 <span class="sd">    parcel_profile : Calculate complete parcel profile</span>
 <span class="sd">    potential_temperature</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">temperature</span> <span class="o">*</span> <span class="p">(</span><span class="n">pressure</span> <span class="o">/</span> <span class="n">pressure</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="n">kappa</span></div>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+    <span class="k">return</span> <span class="n">temperature</span> <span class="o">*</span> <span class="p">(</span><span class="n">pressure</span> <span class="o">/</span> <span class="n">pressure</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="n">kappa</span>
 
 
 <div class="viewcode-block" id="moist_lapse"><a class="viewcode-back" href="../../../api/generated/metpy.calc.moist_lapse.html#metpy.calc.moist_lapse">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -361,8 +405,8 @@
         <span class="n">frac</span> <span class="o">=</span> <span class="p">((</span><span class="n">Rd</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="n">Lv</span> <span class="o">*</span> <span class="n">rs</span><span class="p">)</span> <span class="o">/</span>
                 <span class="p">(</span><span class="n">Cp_d</span> <span class="o">+</span> <span class="p">(</span><span class="n">Lv</span> <span class="o">*</span> <span class="n">Lv</span> <span class="o">*</span> <span class="n">rs</span> <span class="o">*</span> <span class="n">epsilon</span> <span class="o">/</span> <span class="p">(</span><span class="n">Rd</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">t</span><span class="p">))))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;kelvin&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">frac</span> <span class="o">/</span> <span class="n">p</span>
-    <span class="k">return</span> <span class="n">units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">si</span><span class="o">.</span><span class="n">odeint</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">atleast_1d</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span>
-                                    <span class="n">pressure</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span> <span class="n">temperature</span><span class="o">.</span><span class="n">units</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">si</span><span class="o">.</span><span class="n">odeint</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">atleast_1d</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span></div>
+                                    <span class="n">pressure</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span> <span class="n">temperature</span><span class="o">.</span><span class="n">units</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="lcl"><a class="viewcode-back" href="../../../api/generated/metpy.calc.lcl.html#metpy.calc.lcl">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -417,8 +461,8 @@
     <span class="n">w</span> <span class="o">=</span> <span class="n">mixing_ratio</span><span class="p">(</span><span class="n">saturation_vapor_pressure</span><span class="p">(</span><span class="n">dewpt</span><span class="p">),</span> <span class="n">pressure</span><span class="p">)</span>
     <span class="n">fp</span> <span class="o">=</span> <span class="n">so</span><span class="o">.</span><span class="n">fixed_point</span><span class="p">(</span><span class="n">_lcl_iter</span><span class="p">,</span> <span class="n">pressure</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">pressure</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">temperature</span><span class="p">),</span>
                         <span class="n">xtol</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="n">max_iters</span><span class="p">)</span>
-    <span class="n">lcl_p</span> <span class="o">=</span> <span class="n">fp</span> <span class="o">*</span> <span class="n">pressure</span><span class="o">.</span><span class="n">units</span>
-    <span class="k">return</span> <span class="n">lcl_p</span><span class="p">,</span> <span class="n">dewpoint</span><span class="p">(</span><span class="n">vapor_pressure</span><span class="p">(</span><span class="n">lcl_p</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span></div>
+    <span class="n">lcl_p</span> <span class="o">=</span> <span class="n">fp</span> <span class="o">*</span> <span class="n">pressure</span><span class="o">.</span><span class="n">units</span></div>
+    <span class="k">return</span> <span class="n">lcl_p</span><span class="p">,</span> <span class="n">dewpoint</span><span class="p">(</span><span class="n">vapor_pressure</span><span class="p">(</span><span class="n">lcl_p</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="lfc"><a class="viewcode-back" href="../../../api/generated/metpy.calc.lfc.html#metpy.calc.lfc">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -462,8 +506,8 @@
         <span class="k">else</span><span class="p">:</span>  <span class="c1"># LFC = LCL</span>
             <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">lcl</span><span class="p">(</span><span class="n">pressure</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">temperature</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dewpt</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+    <span class="k">else</span><span class="p">:</span></div>
+        <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="el"><a class="viewcode-back" href="../../../api/generated/metpy.calc.el.html#metpy.calc.el">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -503,8 +547,8 @@
     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">find_intersections</span><span class="p">(</span><span class="n">pressure</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">ideal_profile</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">temperature</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">*</span> <span class="n">pressure</span><span class="o">.</span><span class="n">units</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">*</span> <span class="n">temperature</span><span class="o">.</span><span class="n">units</span></div>
+    <span class="k">else</span><span class="p">:</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">*</span> <span class="n">pressure</span><span class="o">.</span><span class="n">units</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">*</span> <span class="n">temperature</span><span class="o">.</span><span class="n">units</span>
 
 
 <div class="viewcode-block" id="parcel_profile"><a class="viewcode-back" href="../../../api/generated/metpy.calc.parcel_profile.html#metpy.calc.parcel_profile">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -549,8 +593,8 @@
     <span class="n">press_upper</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">((</span><span class="n">lcl_pressure</span><span class="p">,</span> <span class="n">pressure</span><span class="p">[</span><span class="n">pressure</span> <span class="o">&lt;</span> <span class="n">lcl_pressure</span><span class="p">]))</span>
     <span class="n">t2</span> <span class="o">=</span> <span class="n">moist_lapse</span><span class="p">(</span><span class="n">press_upper</span><span class="p">,</span> <span class="n">t1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">t1</span><span class="o">.</span><span class="n">units</span><span class="p">)</span>
 
-    <span class="c1"># Return LCL *without* the LCL point</span>
-    <span class="k">return</span> <span class="n">concatenate</span><span class="p">((</span><span class="n">t1</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">t2</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span></div>
+    <span class="c1"># Return LCL *without* the LCL point</span></div>
+    <span class="k">return</span> <span class="n">concatenate</span><span class="p">((</span><span class="n">t1</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">t2</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
 
 
 <div class="viewcode-block" id="vapor_pressure"><a class="viewcode-back" href="../../../api/generated/metpy.calc.vapor_pressure.html#metpy.calc.vapor_pressure">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -585,8 +629,8 @@
 <span class="sd">    --------</span>
 <span class="sd">    saturation_vapor_pressure, dewpoint</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">pressure</span> <span class="o">*</span> <span class="n">mixing</span> <span class="o">/</span> <span class="p">(</span><span class="n">epsilon</span> <span class="o">+</span> <span class="n">mixing</span><span class="p">)</span></div>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+    <span class="k">return</span> <span class="n">pressure</span> <span class="o">*</span> <span class="n">mixing</span> <span class="o">/</span> <span class="p">(</span><span class="n">epsilon</span> <span class="o">+</span> <span class="n">mixing</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="saturation_vapor_pressure"><a class="viewcode-back" href="../../../api/generated/metpy.calc.saturation_vapor_pressure.html#metpy.calc.saturation_vapor_pressure">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -620,8 +664,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Converted from original in terms of C to use kelvin. Using raw absolute values of C in</span>
     <span class="c1"># a formula plays havoc with units support.</span>
-    <span class="k">return</span> <span class="n">sat_pressure_0c</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">17.67</span> <span class="o">*</span> <span class="p">(</span><span class="n">temperature</span> <span class="o">-</span> <span class="mf">273.15</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">kelvin</span><span class="p">)</span> <span class="o">/</span>
-                                    <span class="p">(</span><span class="n">temperature</span> <span class="o">-</span> <span class="mf">29.65</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">kelvin</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="n">sat_pressure_0c</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">17.67</span> <span class="o">*</span> <span class="p">(</span><span class="n">temperature</span> <span class="o">-</span> <span class="mf">273.15</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">kelvin</span><span class="p">)</span> <span class="o">/</span></div>
+                                    <span class="p">(</span><span class="n">temperature</span> <span class="o">-</span> <span class="mf">29.65</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">kelvin</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="dewpoint_rh"><a class="viewcode-back" href="../../../api/generated/metpy.calc.dewpoint_rh.html#metpy.calc.dewpoint_rh">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -647,8 +691,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">rh</span> <span class="o">&gt;</span> <span class="mf">1.2</span><span class="p">):</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Relative humidity &gt;120%, ensure proper units.&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">dewpoint</span><span class="p">(</span><span class="n">rh</span> <span class="o">*</span> <span class="n">saturation_vapor_pressure</span><span class="p">(</span><span class="n">temperature</span><span class="p">))</span></div>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Relative humidity &gt;120%, ensure proper units.&#39;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">dewpoint</span><span class="p">(</span><span class="n">rh</span> <span class="o">*</span> <span class="n">saturation_vapor_pressure</span><span class="p">(</span><span class="n">temperature</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="dewpoint"><a class="viewcode-back" href="../../../api/generated/metpy.calc.dewpoint.html#metpy.calc.dewpoint">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -679,8 +723,8 @@
 <span class="sd">    .. math:: T = \frac{243.5 log(e / 6.112)}{17.67 - log(e / 6.112)}</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">e</span> <span class="o">/</span> <span class="n">sat_pressure_0c</span><span class="p">)</span>
-    <span class="k">return</span> <span class="mf">0.</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">degC</span> <span class="o">+</span> <span class="mf">243.5</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">delta_degC</span> <span class="o">*</span> <span class="n">val</span> <span class="o">/</span> <span class="p">(</span><span class="mf">17.67</span> <span class="o">-</span> <span class="n">val</span><span class="p">)</span></div>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">e</span> <span class="o">/</span> <span class="n">sat_pressure_0c</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="mf">0.</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">degC</span> <span class="o">+</span> <span class="mf">243.5</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">delta_degC</span> <span class="o">*</span> <span class="n">val</span> <span class="o">/</span> <span class="p">(</span><span class="mf">17.67</span> <span class="o">-</span> <span class="n">val</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="mixing_ratio"><a class="viewcode-back" href="../../../api/generated/metpy.calc.mixing_ratio.html#metpy.calc.mixing_ratio">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -720,8 +764,8 @@
 <span class="sd">    saturation_mixing_ratio, vapor_pressure</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">molecular_weight_ratio</span> <span class="o">*</span>
-            <span class="n">part_press</span> <span class="o">/</span> <span class="p">(</span><span class="n">tot_press</span> <span class="o">-</span> <span class="n">part_press</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">molecular_weight_ratio</span> <span class="o">*</span></div>
+            <span class="n">part_press</span> <span class="o">/</span> <span class="p">(</span><span class="n">tot_press</span> <span class="o">-</span> <span class="n">part_press</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="saturation_mixing_ratio"><a class="viewcode-back" href="../../../api/generated/metpy.calc.saturation_mixing_ratio.html#metpy.calc.saturation_mixing_ratio">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -744,8 +788,8 @@
 <span class="sd">    `pint.Quantity`</span>
 <span class="sd">        The saturation mixing ratio, dimensionless</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">mixing_ratio</span><span class="p">(</span><span class="n">saturation_vapor_pressure</span><span class="p">(</span><span class="n">temperature</span><span class="p">),</span> <span class="n">tot_press</span><span class="p">)</span></div>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+    <span class="k">return</span> <span class="n">mixing_ratio</span><span class="p">(</span><span class="n">saturation_vapor_pressure</span><span class="p">(</span><span class="n">temperature</span><span class="p">),</span> <span class="n">tot_press</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="equivalent_potential_temperature"><a class="viewcode-back" href="../../../api/generated/metpy.calc.equivalent_potential_temperature.html#metpy.calc.equivalent_potential_temperature">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -800,8 +844,8 @@
     <span class="n">t_l</span> <span class="o">=</span> <span class="mi">56</span> <span class="o">+</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="n">td</span> <span class="o">-</span> <span class="mi">56</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="n">td</span><span class="p">)</span> <span class="o">/</span> <span class="mf">800.</span><span class="p">)</span>
     <span class="n">th_l</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1000</span> <span class="o">/</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="n">e</span><span class="p">))</span> <span class="o">**</span> <span class="n">kappa</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="n">t_l</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mf">0.28</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span>
     <span class="n">th_e</span> <span class="o">=</span> <span class="n">th_l</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">3036.</span> <span class="o">/</span> <span class="n">t_l</span> <span class="o">-</span> <span class="mf">1.78</span><span class="p">)</span> <span class="o">*</span> <span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.448</span> <span class="o">*</span> <span class="n">r</span><span class="p">))</span>
-
-    <span class="k">return</span> <span class="n">th_e</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">kelvin</span></div>
+</div>
+    <span class="k">return</span> <span class="n">th_e</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">kelvin</span>
 
 
 <div class="viewcode-block" id="virtual_temperature"><a class="viewcode-back" href="../../../api/generated/metpy.calc.virtual_temperature.html#metpy.calc.virtual_temperature">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -833,8 +877,8 @@
 <span class="sd">    .. math:: T_v = T \frac{\text{w} + \epsilon}{\epsilon\,(1 + \text{w})}</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">temperature</span> <span class="o">*</span> <span class="p">((</span><span class="n">mixing</span> <span class="o">+</span> <span class="n">molecular_weight_ratio</span><span class="p">)</span> <span class="o">/</span>
-                          <span class="p">(</span><span class="n">molecular_weight_ratio</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">mixing</span><span class="p">)))</span></div>
+    <span class="k">return</span> <span class="n">temperature</span> <span class="o">*</span> <span class="p">((</span><span class="n">mixing</span> <span class="o">+</span> <span class="n">molecular_weight_ratio</span><span class="p">)</span> <span class="o">/</span></div>
+                          <span class="p">(</span><span class="n">molecular_weight_ratio</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">mixing</span><span class="p">)))</span>
 
 
 <div class="viewcode-block" id="virtual_potential_temperature"><a class="viewcode-back" href="../../../api/generated/metpy.calc.virtual_potential_temperature.html#metpy.calc.virtual_potential_temperature">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -869,8 +913,8 @@
 <span class="sd">    .. math:: \Theta_v = \Theta \frac{\text{w} + \epsilon}{\epsilon\,(1 + \text{w})}</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">pottemp</span> <span class="o">=</span> <span class="n">potential_temperature</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">virtual_temperature</span><span class="p">(</span><span class="n">pottemp</span><span class="p">,</span> <span class="n">mixing</span><span class="p">,</span> <span class="n">molecular_weight_ratio</span><span class="p">)</span></div>
+    <span class="n">pottemp</span> <span class="o">=</span> <span class="n">potential_temperature</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">virtual_temperature</span><span class="p">(</span><span class="n">pottemp</span><span class="p">,</span> <span class="n">mixing</span><span class="p">,</span> <span class="n">molecular_weight_ratio</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="density"><a class="viewcode-back" href="../../../api/generated/metpy.calc.density.html#metpy.calc.density">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -904,8 +948,8 @@
 <span class="sd">    .. math:: \rho = \frac{p}{R_dT_v}</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">virttemp</span> <span class="o">=</span> <span class="n">virtual_temperature</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">mixing</span><span class="p">,</span> <span class="n">molecular_weight_ratio</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">pressure</span> <span class="o">/</span> <span class="p">(</span><span class="n">Rd</span> <span class="o">*</span> <span class="n">virttemp</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">kilogram</span> <span class="o">/</span> <span class="n">units</span><span class="o">.</span><span class="n">meter</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span></div>
+    <span class="n">virttemp</span> <span class="o">=</span> <span class="n">virtual_temperature</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">mixing</span><span class="p">,</span> <span class="n">molecular_weight_ratio</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">pressure</span> <span class="o">/</span> <span class="p">(</span><span class="n">Rd</span> <span class="o">*</span> <span class="n">virttemp</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">kilogram</span> <span class="o">/</span> <span class="n">units</span><span class="o">.</span><span class="n">meter</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="relative_humidity_wet_psychrometric"><a class="viewcode-back" href="../../../api/generated/metpy.calc.relative_humidity_wet_psychrometric.html#metpy.calc.relative_humidity_wet_psychrometric">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -945,8 +989,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">psychrometric_vapor_pressure_wet</span><span class="p">(</span><span class="n">dry_bulb_temperature</span><span class="p">,</span> <span class="n">web_bulb_temperature</span><span class="p">,</span>
-                                             <span class="n">pressure</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">/</span>
-            <span class="n">saturation_vapor_pressure</span><span class="p">(</span><span class="n">dry_bulb_temperature</span><span class="p">))</span></div>
+                                             <span class="n">pressure</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">/</span></div>
+            <span class="n">saturation_vapor_pressure</span><span class="p">(</span><span class="n">dry_bulb_temperature</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="psychrometric_vapor_pressure_wet"><a class="viewcode-back" href="../../../api/generated/metpy.calc.psychrometric_vapor_pressure_wet.html#metpy.calc.psychrometric_vapor_pressure_wet">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -994,8 +1038,8 @@
 <span class="sd">    saturation_vapor_pressure</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">saturation_vapor_pressure</span><span class="p">(</span><span class="n">wet_bulb_temperature</span><span class="p">)</span> <span class="o">-</span> <span class="n">psychrometer_coefficient</span> <span class="o">*</span>
-            <span class="n">pressure</span> <span class="o">*</span> <span class="p">(</span><span class="n">dry_bulb_temperature</span> <span class="o">-</span> <span class="n">wet_bulb_temperature</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;kelvin&#39;</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">saturation_vapor_pressure</span><span class="p">(</span><span class="n">wet_bulb_temperature</span><span class="p">)</span> <span class="o">-</span> <span class="n">psychrometer_coefficient</span> <span class="o">*</span></div>
+            <span class="n">pressure</span> <span class="o">*</span> <span class="p">(</span><span class="n">dry_bulb_temperature</span> <span class="o">-</span> <span class="n">wet_bulb_temperature</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;kelvin&#39;</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="mixing_ratio_from_relative_humidity"><a class="viewcode-back" href="../../../api/generated/metpy.calc.mixing_ratio_from_relative_humidity.html#metpy.calc.mixing_ratio_from_relative_humidity">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -1033,7 +1077,8 @@
 <span class="sd">    relative_humidity_from_mixing_ratio, saturation_mixing_ratio</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">relative_humidity</span> <span class="o">*</span> <span class="n">saturation_mixing_ratio</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">relative_humidity</span> <span class="o">*</span></div>
+            <span class="n">saturation_mixing_ratio</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="relative_humidity_from_mixing_ratio"><a class="viewcode-back" href="../../../api/generated/metpy.calc.relative_humidity_from_mixing_ratio.html#metpy.calc.relative_humidity_from_mixing_ratio">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -1069,8 +1114,8 @@
 <span class="sd">    --------</span>
 <span class="sd">    mixing_ratio_from_relative_humidity, saturation_mixing_ratio</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">mixing_ratio</span> <span class="o">/</span> <span class="n">saturation_mixing_ratio</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">)</span></div>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+    <span class="k">return</span> <span class="n">mixing_ratio</span> <span class="o">/</span> <span class="n">saturation_mixing_ratio</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="mixing_ratio_from_specific_humidity"><a class="viewcode-back" href="../../../api/generated/metpy.calc.mixing_ratio_from_specific_humidity.html#metpy.calc.mixing_ratio_from_specific_humidity">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -1105,8 +1150,8 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">specific_humidity</span> <span class="o">=</span> <span class="n">specific_humidity</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-        <span class="k">pass</span>
-    <span class="k">return</span> <span class="n">specific_humidity</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">specific_humidity</span><span class="p">)</span></div>
+        <span class="k">pass</span></div>
+    <span class="k">return</span> <span class="n">specific_humidity</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">specific_humidity</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="specific_humidity_from_mixing_ratio"><a class="viewcode-back" href="../../../api/generated/metpy.calc.specific_humidity_from_mixing_ratio.html#metpy.calc.specific_humidity_from_mixing_ratio">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -1141,8 +1186,8 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">mixing_ratio</span> <span class="o">=</span> <span class="n">mixing_ratio</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-        <span class="k">pass</span>
-    <span class="k">return</span> <span class="n">mixing_ratio</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">mixing_ratio</span><span class="p">)</span></div>
+        <span class="k">pass</span></div>
+    <span class="k">return</span> <span class="n">mixing_ratio</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">mixing_ratio</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="relative_humidity_from_specific_humidity"><a class="viewcode-back" href="../../../api/generated/metpy.calc.relative_humidity_from_specific_humidity.html#metpy.calc.relative_humidity_from_specific_humidity">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -1179,8 +1224,8 @@
 <span class="sd">    relative_humidity_from_mixing_ratio</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">mixing_ratio_from_specific_humidity</span><span class="p">(</span><span class="n">specific_humidity</span><span class="p">)</span> <span class="o">/</span>
-            <span class="n">saturation_mixing_ratio</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">mixing_ratio_from_specific_humidity</span><span class="p">(</span><span class="n">specific_humidity</span><span class="p">)</span> <span class="o">/</span></div>
+            <span class="n">saturation_mixing_ratio</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="cape_cin"><a class="viewcode-back" href="../../../api/generated/metpy.calc.cape_cin.html#metpy.calc.cape_cin">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -1274,8 +1319,8 @@
     <span class="n">x_clipped</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">p_mask</span><span class="p">]</span>
     <span class="n">y_clipped</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">p_mask</span><span class="p">]</span>
     <span class="n">cin</span> <span class="o">=</span> <span class="p">(</span><span class="n">Rd</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">y_clipped</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x_clipped</span><span class="p">))</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">degK</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="p">(</span><span class="s1">&#39;J/kg&#39;</span><span class="p">))</span>
-
-    <span class="k">return</span> <span class="n">cape</span><span class="p">,</span> <span class="n">cin</span></div>
+</div>
+    <span class="k">return</span> <span class="n">cape</span><span class="p">,</span> <span class="n">cin</span>
 
 
 <span class="k">def</span> <span class="nf">_find_append_zero_crossings</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
@@ -1359,8 +1404,8 @@
     <span class="n">p_layer</span><span class="p">,</span> <span class="n">T_layer</span><span class="p">,</span> <span class="n">Td_layer</span> <span class="o">=</span> <span class="n">get_layer</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">dewpoint</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="n">bottom</span><span class="p">,</span>
                                            <span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">,</span> <span class="n">heights</span><span class="o">=</span><span class="n">heights</span><span class="p">,</span> <span class="n">interpolate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">theta_e</span> <span class="o">=</span> <span class="n">equivalent_potential_temperature</span><span class="p">(</span><span class="n">p_layer</span><span class="p">,</span> <span class="n">T_layer</span><span class="p">,</span> <span class="n">Td_layer</span><span class="p">)</span>
-    <span class="n">max_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">theta_e</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">p_layer</span><span class="p">[</span><span class="n">max_idx</span><span class="p">],</span> <span class="n">T_layer</span><span class="p">[</span><span class="n">max_idx</span><span class="p">],</span> <span class="n">Td_layer</span><span class="p">[</span><span class="n">max_idx</span><span class="p">],</span> <span class="n">max_idx</span></div>
+    <span class="n">max_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">theta_e</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">p_layer</span><span class="p">[</span><span class="n">max_idx</span><span class="p">],</span> <span class="n">T_layer</span><span class="p">[</span><span class="n">max_idx</span><span class="p">],</span> <span class="n">Td_layer</span><span class="p">[</span><span class="n">max_idx</span><span class="p">],</span> <span class="n">max_idx</span>
 
 
 <div class="viewcode-block" id="isentropic_interpolation"><a class="viewcode-back" href="../../../api/generated/metpy.calc.isentropic_interpolation.html#metpy.calc.isentropic_interpolation">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -1519,8 +1564,8 @@
             <span class="n">arg_out</span> <span class="o">=</span> <span class="n">interp</span><span class="p">(</span><span class="n">isentlevels</span><span class="p">,</span> <span class="n">pres_theta</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
             <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg_out</span><span class="p">)</span>
 
-    <span class="c1"># output values as a list</span>
-    <span class="k">return</span> <span class="n">ret</span></div>
+    <span class="c1"># output values as a list</span></div>
+    <span class="k">return</span> <span class="n">ret</span>
 
 
 <div class="viewcode-block" id="surface_based_cape_cin"><a class="viewcode-back" href="../../../api/generated/metpy.calc.surface_based_cape_cin.html#metpy.calc.surface_based_cape_cin">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -1556,8 +1601,8 @@
 <span class="sd">    cape_cin, parcel_profile</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">profile</span> <span class="o">=</span> <span class="n">parcel_profile</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dewpoint</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">cape_cin</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">dewpoint</span><span class="p">,</span> <span class="n">profile</span><span class="p">)</span></div>
+    <span class="n">profile</span> <span class="o">=</span> <span class="n">parcel_profile</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dewpoint</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+    <span class="k">return</span> <span class="n">cape_cin</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">dewpoint</span><span class="p">,</span> <span class="n">profile</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="most_unstable_cape_cin"><a class="viewcode-back" href="../../../api/generated/metpy.calc.most_unstable_cape_cin.html#metpy.calc.most_unstable_cape_cin">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -1597,8 +1642,8 @@
                                                                               <span class="n">dewpoint</span><span class="p">,</span>
                                                                               <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">mu_profile</span> <span class="o">=</span> <span class="n">parcel_profile</span><span class="p">(</span><span class="n">pressure</span><span class="p">[</span><span class="n">parcel_idx</span><span class="p">:],</span> <span class="n">parcel_temperature</span><span class="p">,</span> <span class="n">parcel_dewpoint</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">cape_cin</span><span class="p">(</span><span class="n">pressure</span><span class="p">[</span><span class="n">parcel_idx</span><span class="p">:],</span> <span class="n">temperature</span><span class="p">[</span><span class="n">parcel_idx</span><span class="p">:],</span>
-                    <span class="n">dewpoint</span><span class="p">[</span><span class="n">parcel_idx</span><span class="p">:],</span> <span class="n">mu_profile</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">cape_cin</span><span class="p">(</span><span class="n">pressure</span><span class="p">[</span><span class="n">parcel_idx</span><span class="p">:],</span> <span class="n">temperature</span><span class="p">[</span><span class="n">parcel_idx</span><span class="p">:],</span></div>
+                    <span class="n">dewpoint</span><span class="p">[</span><span class="n">parcel_idx</span><span class="p">:],</span> <span class="n">mu_profile</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="mixed_parcel"><a class="viewcode-back" href="../../../api/generated/metpy.calc.mixed_parcel.html#metpy.calc.mixed_parcel">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -1658,8 +1703,8 @@
     <span class="n">mean_vapor_pressure</span> <span class="o">=</span> <span class="n">vapor_pressure</span><span class="p">(</span><span class="n">parcel_start_pressure</span><span class="p">,</span> <span class="n">mean_mixing_ratio</span><span class="p">)</span>
     <span class="n">mean_dewpoint</span> <span class="o">=</span> <span class="n">dewpoint</span><span class="p">(</span><span class="n">mean_vapor_pressure</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="p">(</span><span class="n">parcel_start_pressure</span><span class="p">,</span> <span class="n">mean_temperature</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">temperature</span><span class="o">.</span><span class="n">units</span><span class="p">),</span>
-            <span class="n">mean_dewpoint</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dewpt</span><span class="o">.</span><span class="n">units</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">parcel_start_pressure</span><span class="p">,</span> <span class="n">mean_temperature</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">temperature</span><span class="o">.</span><span class="n">units</span><span class="p">),</span></div>
+            <span class="n">mean_dewpoint</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dewpt</span><span class="o">.</span><span class="n">units</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="mixed_layer"><a class="viewcode-back" href="../../../api/generated/metpy.calc.mixed_layer.html#metpy.calc.mixed_layer">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -1708,8 +1753,8 @@
     <span class="k">for</span> <span class="n">datavar_layer</span> <span class="ow">in</span> <span class="n">datavars_layer</span><span class="p">:</span>
         <span class="n">actual_depth</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">p_layer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">p_layer</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">actual_depth</span><span class="o">.</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">datavar_layer</span><span class="p">,</span> <span class="n">p_layer</span><span class="p">)</span> <span class="o">*</span>
-                   <span class="n">datavar_layer</span><span class="o">.</span><span class="n">units</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ret</span></div>
+                   <span class="n">datavar_layer</span><span class="o">.</span><span class="n">units</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">ret</span>
 
 
 <div class="viewcode-block" id="dry_static_energy"><a class="viewcode-back" href="../../../api/generated/metpy.calc.dry_static_energy.html#metpy.calc.dry_static_energy">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -1739,8 +1784,8 @@
 <span class="sd">    `pint.Quantity`</span>
 <span class="sd">        The dry static energy</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">g</span> <span class="o">*</span> <span class="n">heights</span> <span class="o">+</span> <span class="n">Cp_d</span> <span class="o">*</span> <span class="n">temperature</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;kJ/kg&#39;</span><span class="p">)</span></div>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">g</span> <span class="o">*</span> <span class="n">heights</span> <span class="o">+</span> <span class="n">Cp_d</span> <span class="o">*</span> <span class="n">temperature</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;kJ/kg&#39;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="moist_static_energy"><a class="viewcode-back" href="../../../api/generated/metpy.calc.moist_static_energy.html#metpy.calc.moist_static_energy">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -1773,8 +1818,8 @@
 <span class="sd">        The moist static energy</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">dry_static_energy</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">temperature</span><span class="p">)</span> <span class="o">+</span>
-            <span class="n">Lv</span> <span class="o">*</span> <span class="n">specific_humidity</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;dimensionless&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;kJ/kg&#39;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">dry_static_energy</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">temperature</span><span class="p">)</span> <span class="o">+</span></div>
+            <span class="n">Lv</span> <span class="o">*</span> <span class="n">specific_humidity</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;dimensionless&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;kJ/kg&#39;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="thickness_hydrostatic"><a class="viewcode-back" href="../../../api/generated/metpy.calc.thickness_hydrostatic.html#metpy.calc.thickness_hydrostatic">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -1845,8 +1890,8 @@
             <span class="n">layer_virttemp</span> <span class="o">=</span> <span class="n">virtual_temperature</span><span class="p">(</span><span class="n">layer_temp</span><span class="p">,</span> <span class="n">layer_w</span><span class="p">,</span> <span class="n">molecular_weight_ratio</span><span class="p">)</span>
 
     <span class="c1"># Take the integral (with unit handling) and return the result in meters</span>
-    <span class="k">return</span> <span class="p">(</span><span class="o">-</span> <span class="n">Rd</span> <span class="o">/</span> <span class="n">g</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">layer_virttemp</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">),</span> <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">layer_p</span> <span class="o">/</span> <span class="n">units</span><span class="o">.</span><span class="n">hPa</span><span class="p">))</span> <span class="o">*</span>
-            <span class="n">units</span><span class="o">.</span><span class="n">K</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="o">-</span> <span class="n">Rd</span> <span class="o">/</span> <span class="n">g</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">layer_virttemp</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">),</span> <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">layer_p</span> <span class="o">/</span> <span class="n">units</span><span class="o">.</span><span class="n">hPa</span><span class="p">))</span> <span class="o">*</span></div>
+            <span class="n">units</span><span class="o">.</span><span class="n">K</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="thickness_hydrostatic_from_relative_humidity"><a class="viewcode-back" href="../../../api/generated/metpy.calc.thickness_hydrostatic_from_relative_humidity.html#metpy.calc.thickness_hydrostatic_from_relative_humidity">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -1899,8 +1944,177 @@
     <span class="n">depth</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="n">mixing</span> <span class="o">=</span> <span class="n">mixing_ratio_from_relative_humidity</span><span class="p">(</span><span class="n">relative_humidity</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">pressure</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">thickness_hydrostatic</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">mixing</span><span class="o">=</span><span class="n">mixing</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="n">bottom</span><span class="p">,</span>
-                                 <span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">thickness_hydrostatic</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">mixing</span><span class="o">=</span><span class="n">mixing</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="n">bottom</span><span class="p">,</span></div>
+                                 <span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="brunt_vaisala_frequency_squared"><a class="viewcode-back" href="../../../api/generated/metpy.calc.brunt_vaisala_frequency_squared.html#metpy.calc.brunt_vaisala_frequency_squared">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
+<span class="nd">@check_units</span><span class="p">(</span><span class="s1">&#39;[length]&#39;</span><span class="p">,</span> <span class="s1">&#39;[temperature]&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">brunt_vaisala_frequency_squared</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">potential_temperature</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calculate the square of the Brunt-Vaisala frequency.</span>
+
+<span class="sd">    Brunt-Vaisala frequency squared (a measure of atmospheric stability) is given by the</span>
+<span class="sd">    formula:</span>
+
+<span class="sd">    .. math:: N^2 = \frac{g}{\theta} \frac{d\theta}{dz}</span>
+
+<span class="sd">    This formula is based off of Equations 3.75 and 3.77 in [Hobbs2006]_.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    heights : array-like</span>
+<span class="sd">        One-dimensional profile of atmospheric height</span>
+<span class="sd">    potential_temperature : array-like</span>
+<span class="sd">        Atmospheric potential temperature</span>
+<span class="sd">    axis : int, optional</span>
+<span class="sd">        The axis corresponding to vertical in the potential temperature array, defaults to 0.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    array-like</span>
+<span class="sd">        The square of the Brunt-Vaisala frequency.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    brunt_vaisala_frequency, brunt_vaisala_period, potential_temperature</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Ensure validity of temperature units</span>
+    <span class="n">potential_temperature</span> <span class="o">=</span> <span class="n">potential_temperature</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Calculate and return the square of Brunt-Vaisala frequency</span>
+    <span class="k">return</span> <span class="n">g</span> <span class="o">/</span> <span class="n">potential_temperature</span> <span class="o">*</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">potential_temperature</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">heights</span><span class="p">,</span></div>
+                                                        <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="brunt_vaisala_frequency"><a class="viewcode-back" href="../../../api/generated/metpy.calc.brunt_vaisala_frequency.html#metpy.calc.brunt_vaisala_frequency">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
+<span class="nd">@check_units</span><span class="p">(</span><span class="s1">&#39;[length]&#39;</span><span class="p">,</span> <span class="s1">&#39;[temperature]&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">brunt_vaisala_frequency</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">potential_temperature</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calculate the Brunt-Vaisala frequency.</span>
+
+<span class="sd">    This function will calculate the Brunt-Vaisala frequency as follows:</span>
+
+<span class="sd">    .. math:: N = \left( \frac{g}{\theta} \frac{d\theta}{dz} \right)^\frac{1}{2}</span>
+
+<span class="sd">    This formula based off of Equations 3.75 and 3.77 in [Hobbs2006]_.</span>
+
+<span class="sd">    This function is a wrapper for `brunt_vaisala_frequency_squared` that filters out negative</span>
+<span class="sd">    (unstable) quanties and takes the square root.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    heights : array-like</span>
+<span class="sd">        One-dimensional profile of atmospheric height</span>
+<span class="sd">    potential_temperature : array-like</span>
+<span class="sd">        Atmospheric potential temperature</span>
+<span class="sd">    axis : int, optional</span>
+<span class="sd">        The axis corresponding to vertical in the potential temperature array, defaults to 0.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    array-like</span>
+<span class="sd">        Brunt-Vaisala frequency.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    brunt_vaisala_frequency_squared, brunt_vaisala_period, potential_temperature</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bv_freq_squared</span> <span class="o">=</span> <span class="n">brunt_vaisala_frequency_squared</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">potential_temperature</span><span class="p">,</span>
+                                                      <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+    <span class="n">bv_freq_squared</span><span class="p">[</span><span class="n">bv_freq_squared</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+</div>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">bv_freq_squared</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="brunt_vaisala_period"><a class="viewcode-back" href="../../../api/generated/metpy.calc.brunt_vaisala_period.html#metpy.calc.brunt_vaisala_period">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
+<span class="nd">@check_units</span><span class="p">(</span><span class="s1">&#39;[length]&#39;</span><span class="p">,</span> <span class="s1">&#39;[temperature]&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">brunt_vaisala_period</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">potential_temperature</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calculate the Brunt-Vaisala period.</span>
+
+<span class="sd">    This function is a helper function for `brunt_vaisala_frequency` that calculates the</span>
+<span class="sd">    period of oscilation as in Exercise 3.13 of [Hobbs2006]_:</span>
+
+<span class="sd">    .. math:: \tau = \frac{2\pi}{N}</span>
+
+<span class="sd">    Returns `NaN` when :math:`N^2 &gt; 0`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    heights : array-like</span>
+<span class="sd">        One-dimensional profile of atmospheric height</span>
+<span class="sd">    potential_temperature : array-like</span>
+<span class="sd">        Atmospheric potential temperature</span>
+<span class="sd">    axis : int, optional</span>
+<span class="sd">        The axis corresponding to vertical in the potential temperature array, defaults to 0.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    array-like</span>
+<span class="sd">        Brunt-Vaisala period.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    brunt_vaisala_frequency, brunt_vaisala_frequency_squared, potential_temperature</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bv_freq_squared</span> <span class="o">=</span> <span class="n">brunt_vaisala_frequency_squared</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">potential_temperature</span><span class="p">,</span>
+                                                      <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+    <span class="n">bv_freq_squared</span><span class="p">[</span><span class="n">bv_freq_squared</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+</div>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">bv_freq_squared</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="wet_bulb_temperature"><a class="viewcode-back" href="../../../api/generated/metpy.calc.wet_bulb_temperature.html#metpy.calc.wet_bulb_temperature">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
+<span class="nd">@check_units</span><span class="p">(</span><span class="s1">&#39;[pressure]&#39;</span><span class="p">,</span> <span class="s1">&#39;[temperature]&#39;</span><span class="p">,</span> <span class="s1">&#39;[temperature]&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">wet_bulb_temperature</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">dewpoint</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate the wet-bulb temperature using Normand&#39;s rule.</span>
+
+<span class="sd">    This function calculates the wet-bulb temperature using the Normand method. The LCL is</span>
+<span class="sd">    computed, and that parcel brought down to the starting pressure along a moist adiabat.</span>
+<span class="sd">    Norman method (and others) described and compared by [Knox2017]_.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pressure : `pint.Quantity`</span>
+<span class="sd">        Initial atmospheric pressure</span>
+<span class="sd">    temperature : `pint.Quantity`</span>
+<span class="sd">        Initial atmospheric temperature</span>
+<span class="sd">    dewpoint : `pint.Quantity`</span>
+<span class="sd">        Initial atmospheric dewpoint</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    array-like</span>
+<span class="sd">        Wet-bulb temperature</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    lcl, moist_lapse</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="s1">&#39;shape&#39;</span><span class="p">):</span>
+        <span class="n">pressure</span> <span class="o">=</span> <span class="n">atleast_1d</span><span class="p">(</span><span class="n">pressure</span><span class="p">)</span>
+        <span class="n">temperature</span> <span class="o">=</span> <span class="n">atleast_1d</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+        <span class="n">dewpoint</span> <span class="o">=</span> <span class="n">atleast_1d</span><span class="p">(</span><span class="n">dewpoint</span><span class="p">)</span>
+
+    <span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">([</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">dewpoint</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+                   <span class="n">op_dtypes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="s1">&#39;float&#39;</span><span class="p">],</span>
+                   <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;buffered&#39;</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">press</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">dewp</span><span class="p">,</span> <span class="n">ret</span> <span class="ow">in</span> <span class="n">it</span><span class="p">:</span>
+        <span class="n">press</span> <span class="o">=</span> <span class="n">press</span> <span class="o">*</span> <span class="n">pressure</span><span class="o">.</span><span class="n">units</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span> <span class="o">*</span> <span class="n">temperature</span><span class="o">.</span><span class="n">units</span>
+        <span class="n">dewp</span> <span class="o">=</span> <span class="n">dewp</span> <span class="o">*</span> <span class="n">dewpoint</span><span class="o">.</span><span class="n">units</span>
+        <span class="n">lcl_pressure</span><span class="p">,</span> <span class="n">lcl_temperature</span> <span class="o">=</span> <span class="n">lcl</span><span class="p">(</span><span class="n">press</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">dewp</span><span class="p">)</span>
+        <span class="n">moist_adiabat_temperatures</span> <span class="o">=</span> <span class="n">moist_lapse</span><span class="p">(</span><span class="n">concatenate</span><span class="p">([</span><span class="n">lcl_pressure</span><span class="p">,</span> <span class="n">press</span><span class="p">]),</span>
+                                                 <span class="n">lcl_temperature</span><span class="p">)</span>
+        <span class="n">ret</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">moist_adiabat_temperatures</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># If we started with a scalar, return a scalar</span>
+    <span class="k">if</span> <span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">moist_adiabat_temperatures</span><span class="o">.</span><span class="n">units</span></div>
+    <span class="k">return</span> <span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">moist_adiabat_temperatures</span><span class="o">.</span><span class="n">units</span>
 </pre></div>
 
            </div>
@@ -1916,7 +2130,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, MetPy Developers.
-      Last updated on Jan 04, 2018 at 19:17:05.
+      Last updated on Feb 22, 2018 at 17:33:12.
 
     </p>
   </div>
@@ -1953,7 +2167,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.6.1+116.gba13b4c',
+            VERSION:'0.7.0+56.g81d4479',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

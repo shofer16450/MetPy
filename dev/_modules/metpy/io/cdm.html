@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>metpy.io.cdm &mdash; MetPy 0.6</title>
+  <title>metpy.io.cdm &mdash; MetPy 0.7</title>
   
 
   
@@ -43,7 +43,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="MetPy 0.6" href="../../../index.html"/>
+    <link rel="top" title="MetPy 0.7" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -79,7 +79,7 @@
                 
                   <div class="version-dropdown">
                     <select class="version-list" id="version-list">
-                      <option value=''>0.6</option>
+                      <option value=''>0.7</option>
                       
                         
                           <option value="../latest">latest</option>
@@ -212,8 +212,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="AttributeContainer.__init__"><a class="viewcode-back" href="../../../api/generated/metpy.io.cdm.AttributeContainer.html#metpy.io.cdm.AttributeContainer.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialize an :class:`AttributeContainer`.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_attrs</span> <span class="o">=</span> <span class="p">[]</span></div>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialize an :class:`AttributeContainer`.&quot;&quot;&quot;</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_attrs</span> <span class="o">=</span> <span class="p">[]</span>
 
 <div class="viewcode-block" id="AttributeContainer.ncattrs"><a class="viewcode-back" href="../../../api/generated/metpy.io.cdm.AttributeContainer.html#metpy.io.cdm.AttributeContainer.ncattrs">[docs]</a>    <span class="k">def</span> <span class="nf">ncattrs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Get a list of the names of the netCDF attributes.</span>
@@ -222,8 +222,8 @@
 <span class="sd">        -------</span>
 <span class="sd">        List[str]</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attrs</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attrs</span>
 
     <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Handle setting attributes.&quot;&quot;&quot;</span>
@@ -234,8 +234,8 @@
     <span class="k">def</span> <span class="nf">__delattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Handle attribute deletion.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_attrs&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_attrs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_attrs&#39;</span><span class="p">):</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_attrs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Group"><a class="viewcode-back" href="../../../api/generated/metpy.io.cdm.Group.html#metpy.io.cdm.Group">[docs]</a><span class="k">class</span> <span class="nc">Group</span><span class="p">(</span><span class="n">AttributeContainer</span><span class="p">):</span>
@@ -284,8 +284,8 @@
         <span class="c1">#: :type: dict[str, Dimension]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
 
-        <span class="c1"># Do this last so earlier attributes aren&#39;t captured</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Group</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span></div>
+        <span class="c1"># Do this last so earlier attributes aren&#39;t captured</span></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Group</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
     <span class="c1"># CamelCase API names for netcdf4-python compatibility</span>
 <div class="viewcode-block" id="Group.createGroup"><a class="viewcode-back" href="../../../api/generated/metpy.io.cdm.Group.html#metpy.io.cdm.Group.createGroup">[docs]</a>    <span class="k">def</span> <span class="nf">createGroup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>  <span class="c1"># noqa: N802</span>
@@ -303,8 +303,8 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">grp</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">grp</span>
-        <span class="k">return</span> <span class="n">grp</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">grp</span></div>
+        <span class="k">return</span> <span class="n">grp</span>
 
 <div class="viewcode-block" id="Group.createDimension"><a class="viewcode-back" href="../../../api/generated/metpy.io.cdm.Group.html#metpy.io.cdm.Group.createDimension">[docs]</a>    <span class="k">def</span> <span class="nf">createDimension</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>  <span class="c1"># noqa: N802</span>
         <span class="sd">&quot;&quot;&quot;Create a new :class:`Dimension` in this :class:`Group`.</span>
@@ -323,8 +323,8 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dim</span> <span class="o">=</span> <span class="n">Dimension</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">dim</span>
-        <span class="k">return</span> <span class="n">dim</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">dim</span></div>
+        <span class="k">return</span> <span class="n">dim</span>
 
 <div class="viewcode-block" id="Group.createVariable"><a class="viewcode-back" href="../../../api/generated/metpy.io.cdm.Group.html#metpy.io.cdm.Group.createVariable">[docs]</a>    <span class="k">def</span> <span class="nf">createVariable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="p">(),</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># noqa: N802</span>
                        <span class="n">wrap_array</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -355,8 +355,8 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">var</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">fill_value</span><span class="p">,</span> <span class="n">wrap_array</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">var</span>
-        <span class="k">return</span> <span class="n">var</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">var</span></div>
+        <span class="k">return</span> <span class="n">var</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a string representation of the Group.&quot;&quot;&quot;</span>
@@ -382,8 +382,8 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncattrs</span><span class="p">():</span>
             <span class="n">print_groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Attributes:&#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">att</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncattrs</span><span class="p">():</span>
-                <span class="n">print_groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="si">{0}</span><span class="s1">: </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">att</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">att</span><span class="p">)))</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">print_groups</span><span class="p">)</span></div>
+                <span class="n">print_groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="si">{0}</span><span class="s1">: </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">att</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">att</span><span class="p">)))</span></div>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">print_groups</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Dataset"><a class="viewcode-back" href="../../../api/generated/metpy.io.cdm.Dataset.html#metpy.io.cdm.Dataset">[docs]</a><span class="k">class</span> <span class="nc">Dataset</span><span class="p">(</span><span class="n">Group</span><span class="p">):</span>
@@ -394,8 +394,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Dataset.__init__"><a class="viewcode-back" href="../../../api/generated/metpy.io.cdm.Dataset.html#metpy.io.cdm.Dataset.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize a Dataset.&quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Dataset</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;root&#39;</span><span class="p">)</span></div></div>
+        <span class="sd">&quot;&quot;&quot;Initialize a Dataset.&quot;&quot;&quot;</span></div></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Dataset</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;root&#39;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Variable"><a class="viewcode-back" href="../../../api/generated/metpy.io.cdm.Variable.html#metpy.io.cdm.Variable">[docs]</a><span class="k">class</span> <span class="nc">Variable</span><span class="p">(</span><span class="n">AttributeContainer</span><span class="p">):</span>
@@ -454,8 +454,8 @@
             <span class="k">if</span> <span class="n">fill_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">fill_value</span><span class="p">)</span>
 
-        <span class="c1"># Do this last so earlier attributes aren&#39;t captured</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Variable</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span></div>
+        <span class="c1"># Do this last so earlier attributes aren&#39;t captured</span></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Variable</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
     <span class="c1"># Not a property to maintain compatibility with NetCDF4 python</span>
 <div class="viewcode-block" id="Variable.group"><a class="viewcode-back" href="../../../api/generated/metpy.io.cdm.Variable.html#metpy.io.cdm.Variable.group">[docs]</a>    <span class="k">def</span> <span class="nf">group</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -466,8 +466,8 @@
 <span class="sd">        Group</span>
 <span class="sd">            The parent Group.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -525,8 +525,8 @@
                 <span class="n">shape_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">shape_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">shape = &#39;</span> <span class="o">+</span> <span class="n">shape_str</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span></div>
+            <span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">shape = &#39;</span> <span class="o">+</span> <span class="n">shape_str</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span>
 
 
 <span class="c1"># Punting on unlimited dimensions for now since we&#39;re relying upon numpy for storage</span>
@@ -565,8 +565,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 
         <span class="c1">#: :desc: The size of this Dimension</span>
-        <span class="c1">#: :type: int</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span></div>
+        <span class="c1">#: :type: int</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
 
     <span class="c1"># Not a property to maintain compatibility with NetCDF4 python</span>
 <div class="viewcode-block" id="Dimension.group"><a class="viewcode-back" href="../../../api/generated/metpy.io.cdm.Dimension.html#metpy.io.cdm.Dimension.group">[docs]</a>    <span class="k">def</span> <span class="nf">group</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -577,16 +577,16 @@
 <span class="sd">        Group</span>
 <span class="sd">            The parent Group.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group</span>
 
     <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the length of this Dimension.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a string representation of this Dimension.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">: name = </span><span class="si">{1.name}</span><span class="s1">, size = </span><span class="si">{1.size}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="bp">self</span><span class="p">)</span></div>
+        <span class="sd">&quot;&quot;&quot;Return a string representation of this Dimension.&quot;&quot;&quot;</span></div>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">: name = </span><span class="si">{1.name}</span><span class="s1">, size = </span><span class="si">{1.size}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="bp">self</span><span class="p">)</span>
 
 
 <span class="c1"># Not sure if this lives long-term or not</span>
@@ -623,8 +623,8 @@
         <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;lat_ts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">standard_parallel</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;x_0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Easting</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;y_0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Northing</span>
-
-    <span class="k">return</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+</div>
+    <span class="k">return</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </pre></div>
 
            </div>
@@ -640,7 +640,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, MetPy Developers.
-      Last updated on Jan 04, 2018 at 19:17:05.
+      Last updated on Feb 22, 2018 at 17:33:12.
 
     </p>
   </div>
@@ -677,7 +677,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.6.1+116.gba13b4c',
+            VERSION:'0.7.0+56.g81d4479',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

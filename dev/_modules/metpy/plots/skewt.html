@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>metpy.plots.skewt &mdash; MetPy 0.6</title>
+  <title>metpy.plots.skewt &mdash; MetPy 0.7</title>
   
 
   
@@ -43,7 +43,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="MetPy 0.6" href="../../../index.html"/>
+    <link rel="top" title="MetPy 0.7" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -79,7 +79,7 @@
                 
                   <div class="version-dropdown">
                     <select class="version-list" id="version-list">
-                      <option value=''>0.6</option>
+                      <option value=''>0.7</option>
                       
                         
                           <option value="../latest">latest</option>
@@ -473,8 +473,8 @@
             <span class="nb">len</span><span class="p">(</span><span class="n">subplot</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
             <span class="n">subplot</span> <span class="o">=</span> <span class="p">(</span><span class="n">subplot</span><span class="p">,)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="o">*</span><span class="n">subplot</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;skewx&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="n">rotation</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="o">*</span><span class="n">subplot</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;skewx&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="n">rotation</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
 <div class="viewcode-block" id="SkewT.plot"><a class="viewcode-back" href="../../../api/generated/metpy.plots.SkewT.html#metpy.plots.SkewT.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Plot data.</span>
@@ -517,8 +517,8 @@
 
         <span class="c1"># Try to make sane default temperature plotting</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">MultipleLocator</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-
-        <span class="k">return</span> <span class="n">lines</span></div>
+</div>
+        <span class="k">return</span> <span class="n">lines</span>
 
 <div class="viewcode-block" id="SkewT.plot_barbs"><a class="viewcode-back" href="../../../api/generated/metpy.plots.SkewT.html#metpy.plots.SkewT.plot_barbs">[docs]</a>    <span class="k">def</span> <span class="nf">plot_barbs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xloc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">x_clip_radius</span><span class="o">=</span><span class="mf">0.08</span><span class="p">,</span>
                    <span class="n">y_clip_radius</span><span class="o">=</span><span class="mf">0.08</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -578,8 +578,8 @@
         <span class="c1"># barbs that extend outside.</span>
         <span class="n">ax_bbox</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Bbox</span><span class="p">([[</span><span class="n">xloc</span> <span class="o">-</span> <span class="n">x_clip_radius</span><span class="p">,</span> <span class="o">-</span><span class="n">y_clip_radius</span><span class="p">],</span>
                                    <span class="p">[</span><span class="n">xloc</span> <span class="o">+</span> <span class="n">x_clip_radius</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">y_clip_radius</span><span class="p">]])</span>
-        <span class="n">b</span><span class="o">.</span><span class="n">set_clip_box</span><span class="p">(</span><span class="n">transforms</span><span class="o">.</span><span class="n">TransformedBbox</span><span class="p">(</span><span class="n">ax_bbox</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">b</span></div>
+        <span class="n">b</span><span class="o">.</span><span class="n">set_clip_box</span><span class="p">(</span><span class="n">transforms</span><span class="o">.</span><span class="n">TransformedBbox</span><span class="p">(</span><span class="n">ax_bbox</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="n">b</span>
 
 <div class="viewcode-block" id="SkewT.plot_dry_adiabats"><a class="viewcode-back" href="../../../api/generated/metpy.plots.SkewT.html#metpy.plots.SkewT.plot_dry_adiabats">[docs]</a>    <span class="k">def</span> <span class="nf">plot_dry_adiabats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Plot dry adiabats.</span>
@@ -629,8 +629,8 @@
         <span class="c1"># Add to plot</span>
         <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;colors&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
         <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;linestyles&#39;</span><span class="p">,</span> <span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;alpha&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">LineCollection</span><span class="p">(</span><span class="n">linedata</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span></div>
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;alpha&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">LineCollection</span><span class="p">(</span><span class="n">linedata</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
 
 <div class="viewcode-block" id="SkewT.plot_moist_adiabats"><a class="viewcode-back" href="../../../api/generated/metpy.plots.SkewT.html#metpy.plots.SkewT.plot_moist_adiabats">[docs]</a>    <span class="k">def</span> <span class="nf">plot_moist_adiabats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Plot moist adiabats.</span>
@@ -682,8 +682,8 @@
         <span class="c1"># Add to plot</span>
         <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;colors&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
         <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;linestyles&#39;</span><span class="p">,</span> <span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;alpha&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">LineCollection</span><span class="p">(</span><span class="n">linedata</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span></div>
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;alpha&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">LineCollection</span><span class="p">(</span><span class="n">linedata</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
 
 <div class="viewcode-block" id="SkewT.plot_mixing_lines"><a class="viewcode-back" href="../../../api/generated/metpy.plots.SkewT.html#metpy.plots.SkewT.plot_mixing_lines">[docs]</a>    <span class="k">def</span> <span class="nf">plot_mixing_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Plot lines of constant mixing ratio.</span>
@@ -730,8 +730,8 @@
         <span class="c1"># Add to plot</span>
         <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;colors&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
         <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;linestyles&#39;</span><span class="p">,</span> <span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;alpha&#39;</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">LineCollection</span><span class="p">(</span><span class="n">linedata</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span></div>
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;alpha&#39;</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">LineCollection</span><span class="p">(</span><span class="n">linedata</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
 
 <div class="viewcode-block" id="SkewT.shade_area"><a class="viewcode-back" href="../../../api/generated/metpy.plots.SkewT.html#metpy.plots.SkewT.shade_area">[docs]</a>    <span class="k">def</span> <span class="nf">shade_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shade area between two curves.</span>
@@ -786,8 +786,8 @@
             <span class="n">fill_args</span><span class="p">[</span><span class="s1">&#39;interpolate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="n">arrs</span> <span class="o">=</span> <span class="n">delete_masked_points</span><span class="p">(</span><span class="o">*</span><span class="n">arrs</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">fill_betweenx</span><span class="p">(</span><span class="o">*</span><span class="n">arrs</span><span class="p">,</span> <span class="o">**</span><span class="n">fill_args</span><span class="p">)</span></div>
+</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">fill_betweenx</span><span class="p">(</span><span class="o">*</span><span class="n">arrs</span><span class="p">,</span> <span class="o">**</span><span class="n">fill_args</span><span class="p">)</span>
 
 <div class="viewcode-block" id="SkewT.shade_cape"><a class="viewcode-back" href="../../../api/generated/metpy.plots.SkewT.html#metpy.plots.SkewT.shade_cape">[docs]</a>    <span class="k">def</span> <span class="nf">shade_cape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">t_parcel</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shade areas of CAPE.</span>
@@ -815,8 +815,8 @@
 <span class="sd">        :class:`matplotlib.collections.PolyCollection`</span>
 <span class="sd">        :func:`matplotlib.axes.Axes.fill_betweenx`</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shade_area</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">t_parcel</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;positive&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shade_area</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">t_parcel</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;positive&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="SkewT.shade_cin"><a class="viewcode-back" href="../../../api/generated/metpy.plots.SkewT.html#metpy.plots.SkewT.shade_cin">[docs]</a>    <span class="k">def</span> <span class="nf">shade_cin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">t_parcel</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shade areas of CIN.</span>
@@ -844,8 +844,8 @@
 <span class="sd">        :class:`matplotlib.collections.PolyCollection`</span>
 <span class="sd">        :func:`matplotlib.axes.Axes.fill_betweenx`</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shade_area</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">t_parcel</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;negative&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+<span class="sd">        &quot;&quot;&quot;</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shade_area</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">t_parcel</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;negative&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Hodograph"><a class="viewcode-back" href="../../../api/generated/metpy.plots.Hodograph.html#metpy.plots.Hodograph">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -886,8 +886,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="n">component_range</span><span class="p">,</span> <span class="n">component_range</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="n">component_range</span><span class="p">,</span> <span class="n">component_range</span><span class="p">)</span>
 
-        <span class="c1"># == sqrt(2) * max_range, which is the distance at the corner</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_range</span> <span class="o">=</span> <span class="mf">1.4142135</span> <span class="o">*</span> <span class="n">component_range</span></div>
+        <span class="c1"># == sqrt(2) * max_range, which is the distance at the corner</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_range</span> <span class="o">=</span> <span class="mf">1.4142135</span> <span class="o">*</span> <span class="n">component_range</span>
 
 <div class="viewcode-block" id="Hodograph.add_grid"><a class="viewcode-back" href="../../../api/generated/metpy.plots.Hodograph.html#metpy.plots.Hodograph.add_grid">[docs]</a>    <span class="k">def</span> <span class="nf">add_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">increment</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Add grid lines to hodograph.</span>
@@ -927,8 +927,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">rings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 
         <span class="c1"># Add lines for x=0 and y=0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">yaxis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">grid_args</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">xaxis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">grid_args</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yaxis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">grid_args</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xaxis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">grid_args</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_form_line_args</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
@@ -962,8 +962,8 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">line_args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_form_line_args</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">delete_masked_points</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">line_args</span><span class="p">)</span></div>
+        <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">delete_masked_points</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">line_args</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Hodograph.plot_colormapped"><a class="viewcode-back" href="../../../api/generated/metpy.plots.Hodograph.html#metpy.plots.Hodograph.plot_colormapped">[docs]</a>    <span class="k">def</span> <span class="nf">plot_colormapped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Plot u, v data, with line colored based on a third set of data.</span>
@@ -1036,8 +1036,8 @@
 
         <span class="c1"># Do the plotting</span>
         <span class="n">lc</span> <span class="o">=</span> <span class="n">colored_line</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="o">**</span><span class="n">line_args</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">lc</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">lc</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">lc</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="n">lc</span>
 </pre></div>
 
            </div>
@@ -1053,7 +1053,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, MetPy Developers.
-      Last updated on Jan 04, 2018 at 19:17:05.
+      Last updated on Feb 22, 2018 at 17:33:12.
 
     </p>
   </div>
@@ -1090,7 +1090,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.6.1+116.gba13b4c',
+            VERSION:'0.7.0+56.g81d4479',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

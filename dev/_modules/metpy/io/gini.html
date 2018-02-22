@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>metpy.io.gini &mdash; MetPy 0.6</title>
+  <title>metpy.io.gini &mdash; MetPy 0.7</title>
   
 
   
@@ -43,7 +43,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="MetPy 0.6" href="../../../index.html"/>
+    <link rel="top" title="MetPy 0.7" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -79,7 +79,7 @@
                 
                   <div class="version-dropdown">
                     <select class="version-list" id="version-list">
-                      <option value=''>0.6</option>
+                      <option value=''>0.7</option>
                       
                         
                           <option value="../latest">latest</option>
@@ -418,8 +418,8 @@
 
         <span class="c1"># Check to ensure that we processed all of the data</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="o">.</span><span class="n">at_end</span><span class="p">():</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Leftover unprocessed data beyond EOF marker: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="o">.</span><span class="n">get_next</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span></div>
+            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Leftover unprocessed data beyond EOF marker: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span></div>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="o">.</span><span class="n">get_next</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 
 <div class="viewcode-block" id="GiniFile.to_dataset"><a class="viewcode-back" href="../../../api/generated/metpy.io.GiniFile.html#metpy.io.GiniFile.to_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">to_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert to a CDM dataset.</span>
@@ -487,8 +487,8 @@
 
         <span class="c1"># Add a bit more metadata</span>
         <span class="n">ds</span><span class="o">.</span><span class="n">satellite</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prod_desc</span><span class="o">.</span><span class="n">creating_entity</span>
-        <span class="n">ds</span><span class="o">.</span><span class="n">sector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prod_desc</span><span class="o">.</span><span class="n">sector_id</span>
-        <span class="k">return</span> <span class="n">ds</span></div>
+        <span class="n">ds</span><span class="o">.</span><span class="n">sector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prod_desc</span><span class="o">.</span><span class="n">sector_id</span></div>
+        <span class="k">return</span> <span class="n">ds</span>
 
     <span class="k">def</span> <span class="nf">_process_wmo_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Read off the WMO header from the file, if necessary.&quot;&quot;&quot;</span>
@@ -505,8 +505,8 @@
                  <span class="s1">&#39;Time: </span><span class="si">{0.datetime}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;Size: </span><span class="si">{0.ny}</span><span class="s1">x</span><span class="si">{0.nx}</span><span class="s1">&#39;</span><span class="p">,</span>
                  <span class="s1">&#39;Projection: </span><span class="si">{0.projection.name}</span><span class="s1">&#39;</span><span class="p">,</span>
                  <span class="s1">&#39;Lower Left Corner (Lon, Lat): (</span><span class="si">{0.lo1}</span><span class="s1">, </span><span class="si">{0.la1}</span><span class="s1">)&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;Resolution: </span><span class="si">{1.resolution}</span><span class="s1">km&#39;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prod_desc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prod_desc2</span><span class="p">)</span></div>
+                 <span class="s1">&#39;Resolution: </span><span class="si">{1.resolution}</span><span class="s1">km&#39;</span><span class="p">]</span></div>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prod_desc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prod_desc2</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_add_projection_coords</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">prod_desc</span><span class="p">,</span> <span class="n">proj_var</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">):</span>
@@ -562,7 +562,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, MetPy Developers.
-      Last updated on Jan 04, 2018 at 19:17:05.
+      Last updated on Feb 22, 2018 at 17:33:12.
 
     </p>
   </div>
@@ -599,7 +599,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.6.1+116.gba13b4c',
+            VERSION:'0.7.0+56.g81d4479',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

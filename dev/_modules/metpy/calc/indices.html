@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>metpy.calc.indices &mdash; MetPy 0.6</title>
+  <title>metpy.calc.indices &mdash; MetPy 0.7</title>
   
 
   
@@ -43,7 +43,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="MetPy 0.6" href="../../../index.html"/>
+    <link rel="top" title="MetPy 0.7" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -79,7 +79,7 @@
                 
                   <div class="version-dropdown">
                     <select class="version-list" id="version-list">
-                      <option value=''>0.6</option>
+                      <option value=''>0.7</option>
                       
                         
                           <option value="../latest">latest</option>
@@ -249,8 +249,8 @@
 
     <span class="c1"># Since pressure is in decreasing order, pw will be the opposite sign of that expected.</span>
     <span class="n">pw</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">magnitude</span><span class="p">,</span> <span class="n">pres_layer</span><span class="o">.</span><span class="n">magnitude</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">units</span> <span class="o">*</span> <span class="n">pres_layer</span><span class="o">.</span><span class="n">units</span><span class="p">)</span> <span class="o">/</span>
-                <span class="p">(</span><span class="n">g</span> <span class="o">*</span> <span class="n">rho_l</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">pw</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;millimeters&#39;</span><span class="p">)</span></div>
+                <span class="p">(</span><span class="n">g</span> <span class="o">*</span> <span class="n">rho_l</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="n">pw</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;millimeters&#39;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="mean_pressure_weighted"><a class="viewcode-back" href="../../../api/generated/metpy.calc.mean_pressure_weighted.html#metpy.calc.mean_pressure_weighted">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -299,8 +299,8 @@
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">datavar</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
         <span class="n">arg_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">layer_arg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">layer_p</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">layer_p</span><span class="p">)</span> <span class="o">/</span> <span class="n">pres_int</span>
         <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg_mean</span> <span class="o">*</span> <span class="n">datavar</span><span class="o">.</span><span class="n">units</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">ret</span></div>
+</div>
+    <span class="k">return</span> <span class="n">ret</span>
 
 
 <div class="viewcode-block" id="bunkers_storm_motion"><a class="viewcode-back" href="../../../api/generated/metpy.calc.bunkers_storm_motion.html#metpy.calc.bunkers_storm_motion">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -358,8 +358,8 @@
 
     <span class="c1"># Subtract the deviations to get the LM motion</span>
     <span class="n">left_mover</span> <span class="o">=</span> <span class="n">wind_mean</span> <span class="o">-</span> <span class="n">rdev</span>
-
-    <span class="k">return</span> <span class="n">right_mover</span><span class="p">,</span> <span class="n">left_mover</span><span class="p">,</span> <span class="n">wind_mean</span></div>
+</div>
+    <span class="k">return</span> <span class="n">right_mover</span><span class="p">,</span> <span class="n">left_mover</span><span class="p">,</span> <span class="n">wind_mean</span>
 
 
 <div class="viewcode-block" id="bulk_shear"><a class="viewcode-back" href="../../../api/generated/metpy.calc.bulk_shear.html#metpy.calc.bulk_shear">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -400,8 +400,8 @@
 
     <span class="n">u_shr</span> <span class="o">=</span> <span class="n">u_layer</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">u_layer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">v_shr</span> <span class="o">=</span> <span class="n">v_layer</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">v_layer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="k">return</span> <span class="n">u_shr</span><span class="p">,</span> <span class="n">v_shr</span></div>
+</div>
+    <span class="k">return</span> <span class="n">u_shr</span><span class="p">,</span> <span class="n">v_shr</span>
 
 
 <div class="viewcode-block" id="supercell_composite"><a class="viewcode-back" href="../../../api/generated/metpy.calc.supercell_composite.html#metpy.calc.supercell_composite">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -441,8 +441,8 @@
     <span class="n">effective_shear</span> <span class="o">=</span> <span class="n">effective_shear</span> <span class="o">/</span> <span class="p">(</span><span class="mi">20</span> <span class="o">*</span> <span class="n">units</span><span class="p">(</span><span class="s1">&#39;m/s&#39;</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="p">((</span><span class="n">mucape</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1000</span> <span class="o">*</span> <span class="n">units</span><span class="p">(</span><span class="s1">&#39;J/kg&#39;</span><span class="p">)))</span> <span class="o">*</span>
-            <span class="p">(</span><span class="n">effective_storm_helicity</span> <span class="o">/</span> <span class="p">(</span><span class="mi">50</span> <span class="o">*</span> <span class="n">units</span><span class="p">(</span><span class="s1">&#39;m^2/s^2&#39;</span><span class="p">)))</span> <span class="o">*</span>
-            <span class="n">effective_shear</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span></div>
+            <span class="p">(</span><span class="n">effective_storm_helicity</span> <span class="o">/</span> <span class="p">(</span><span class="mi">50</span> <span class="o">*</span> <span class="n">units</span><span class="p">(</span><span class="s1">&#39;m^2/s^2&#39;</span><span class="p">)))</span> <span class="o">*</span></div>
+            <span class="n">effective_shear</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="significant_tornado"><a class="viewcode-back" href="../../../api/generated/metpy.calc.significant_tornado.html#metpy.calc.significant_tornado">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -494,8 +494,8 @@
     <span class="n">shear_6km</span> <span class="o">/=</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">units</span><span class="p">(</span><span class="s1">&#39;m/s&#39;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">((</span><span class="n">sbcape</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1500.</span> <span class="o">*</span> <span class="n">units</span><span class="p">(</span><span class="s1">&#39;J/kg&#39;</span><span class="p">)))</span> <span class="o">*</span>
-            <span class="n">surface_based_lcl_height</span> <span class="o">*</span>
-            <span class="p">(</span><span class="n">storm_helicity_1km</span> <span class="o">/</span> <span class="p">(</span><span class="mf">150.</span> <span class="o">*</span> <span class="n">units</span><span class="p">(</span><span class="s1">&#39;m^2/s^2&#39;</span><span class="p">)))</span> <span class="o">*</span> <span class="n">shear_6km</span><span class="p">)</span></div>
+            <span class="n">surface_based_lcl_height</span> <span class="o">*</span></div>
+            <span class="p">(</span><span class="n">storm_helicity_1km</span> <span class="o">/</span> <span class="p">(</span><span class="mf">150.</span> <span class="o">*</span> <span class="n">units</span><span class="p">(</span><span class="s1">&#39;m^2/s^2&#39;</span><span class="p">)))</span> <span class="o">*</span> <span class="n">shear_6km</span><span class="p">)</span>
 </pre></div>
 
            </div>
@@ -511,7 +511,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, MetPy Developers.
-      Last updated on Jan 04, 2018 at 19:17:05.
+      Last updated on Feb 22, 2018 at 17:33:12.
 
     </p>
   </div>
@@ -548,7 +548,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.6.1+116.gba13b4c',
+            VERSION:'0.7.0+56.g81d4479',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>metpy.units &mdash; MetPy 0.6</title>
+  <title>metpy.units &mdash; MetPy 0.7</title>
   
 
   
@@ -43,7 +43,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="MetPy 0.6" href="../../index.html"/>
+    <link rel="top" title="MetPy 0.7" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -79,7 +79,7 @@
                 
                   <div class="version-dropdown">
                     <select class="version-list" id="version-list">
-                      <option value=''>0.6</option>
+                      <option value=''>0.7</option>
                       
                         
                           <option value="../latest">latest</option>
@@ -256,8 +256,8 @@
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;to&#39;</span><span class="p">):</span>
             <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dest</span><span class="p">)</span><span class="o">.</span><span class="n">magnitude</span>
         <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
-
-    <span class="k">return</span> <span class="n">units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">),</span> <span class="n">dest</span><span class="p">)</span></div>
+</div>
+    <span class="k">return</span> <span class="n">units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">),</span> <span class="n">dest</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="diff"><a class="viewcode-back" href="../../api/generated/metpy.units.diff.html#metpy.units.diff">[docs]</a><span class="k">def</span> <span class="nf">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -291,8 +291,8 @@
         <span class="c1"># Can&#39;t just use units because of how things like temperature work</span>
         <span class="n">it</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">flat</span>
         <span class="n">true_units</span> <span class="o">=</span> <span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="o">-</span> <span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span><span class="o">.</span><span class="n">units</span>
-        <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span> <span class="o">*</span> <span class="n">true_units</span>
-    <span class="k">return</span> <span class="n">ret</span></div>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span> <span class="o">*</span> <span class="n">true_units</span></div>
+    <span class="k">return</span> <span class="n">ret</span>
 
 
 <div class="viewcode-block" id="atleast_1d"><a class="viewcode-back" href="../../api/generated/metpy.units.atleast_1d.html#metpy.units.atleast_1d">[docs]</a><span class="k">def</span> <span class="nf">atleast_1d</span><span class="p">(</span><span class="o">*</span><span class="n">arrs</span><span class="p">):</span>
@@ -320,8 +320,8 @@
         <span class="k">if</span> <span class="n">orig_units</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">orig_units</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ret</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span> <span class="k">if</span> <span class="n">u</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">m</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">orig_units</span><span class="p">)]</span></div>
+            <span class="k">return</span> <span class="n">ret</span></div>
+    <span class="k">return</span> <span class="p">[</span><span class="n">units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span> <span class="k">if</span> <span class="n">u</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">m</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">orig_units</span><span class="p">)]</span>
 
 
 <div class="viewcode-block" id="atleast_2d"><a class="viewcode-back" href="../../api/generated/metpy.units.atleast_2d.html#metpy.units.atleast_2d">[docs]</a><span class="k">def</span> <span class="nf">atleast_2d</span><span class="p">(</span><span class="o">*</span><span class="n">arrs</span><span class="p">):</span>
@@ -349,8 +349,8 @@
         <span class="k">if</span> <span class="n">orig_units</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">orig_units</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ret</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span> <span class="k">if</span> <span class="n">u</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">m</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">orig_units</span><span class="p">)]</span></div>
+            <span class="k">return</span> <span class="n">ret</span></div>
+    <span class="k">return</span> <span class="p">[</span><span class="n">units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span> <span class="k">if</span> <span class="n">u</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">m</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">orig_units</span><span class="p">)]</span>
 
 
 <div class="viewcode-block" id="masked_array"><a class="viewcode-back" href="../../api/generated/metpy.units.masked_array.html#metpy.units.masked_array">[docs]</a><span class="k">def</span> <span class="nf">masked_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">data_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -376,8 +376,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">data_units</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">data_units</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">units</span>
-    <span class="k">return</span> <span class="n">units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="n">data_units</span><span class="p">)</span></div>
+        <span class="n">data_units</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">units</span></div>
+    <span class="k">return</span> <span class="n">units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="n">data_units</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_check_argument_units</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">dimensionality</span><span class="p">):</span>
@@ -445,8 +445,8 @@
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="k">def</span> <span class="nf">dec</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">func</span>
-
-    <span class="k">return</span> <span class="n">dec</span></div>
+</div>
+    <span class="k">return</span> <span class="n">dec</span>
 
 
 <span class="k">try</span><span class="p">:</span>
@@ -461,8 +461,8 @@
         <span class="sd">&quot;&quot;&quot;Support default axis and tick labeling and default limits.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="PintAxisInfo.__init__"><a class="viewcode-back" href="../../api/generated/metpy.units.PintAxisInfo.html#metpy.units.PintAxisInfo.__init__">[docs]</a>        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">units</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Set the default label to the pretty-print of the unit.&quot;&quot;&quot;</span>
-            <span class="nb">super</span><span class="p">(</span><span class="n">PintAxisInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;{:P}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units</span><span class="p">))</span></div></div>
+            <span class="sd">&quot;&quot;&quot;Set the default label to the pretty-print of the unit.&quot;&quot;&quot;</span></div></div>
+            <span class="nb">super</span><span class="p">(</span><span class="n">PintAxisInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;{:P}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units</span><span class="p">))</span>
 
     <span class="c1"># TODO: Remove object when we drop support for matplotlib 1.4</span>
 <div class="viewcode-block" id="PintConverter"><a class="viewcode-back" href="../../api/generated/metpy.units.PintConverter.html#metpy.units.PintConverter">[docs]</a>    <span class="k">class</span> <span class="nc">PintConverter</span><span class="p">(</span><span class="n">munits</span><span class="o">.</span><span class="n">ConversionInterface</span><span class="p">,</span> <span class="nb">object</span><span class="p">):</span>
@@ -470,15 +470,15 @@
 
 <div class="viewcode-block" id="PintConverter.__init__"><a class="viewcode-back" href="../../api/generated/metpy.units.PintConverter.html#metpy.units.PintConverter.__init__">[docs]</a>        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">registry</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;Initialize converter for pint units.&quot;&quot;&quot;</span>
-            <span class="nb">super</span><span class="p">(</span><span class="n">PintConverter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_reg</span> <span class="o">=</span> <span class="n">registry</span></div>
+            <span class="nb">super</span><span class="p">(</span><span class="n">PintConverter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_reg</span> <span class="o">=</span> <span class="n">registry</span>
 
 <div class="viewcode-block" id="PintConverter.convert"><a class="viewcode-back" href="../../api/generated/metpy.units.PintConverter.html#metpy.units.PintConverter.convert">[docs]</a>        <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;Convert :`Quantity` instances for matplotlib to use.&quot;&quot;&quot;</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
                 <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_convert_value</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span></div>
+            <span class="k">else</span><span class="p">:</span></div>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">_convert_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;Handle converting using attached unit or falling back to axis units.&quot;&quot;&quot;</span>
@@ -489,13 +489,13 @@
 
 <div class="viewcode-block" id="PintConverter.axisinfo"><a class="viewcode-back" href="../../api/generated/metpy.units.PintConverter.html#metpy.units.PintConverter.axisinfo">[docs]</a>        <span class="nd">@staticmethod</span>
         <span class="k">def</span> <span class="nf">axisinfo</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Return axis information for this particular unit.&quot;&quot;&quot;</span>
-            <span class="k">return</span> <span class="n">PintAxisInfo</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span></div>
+            <span class="sd">&quot;&quot;&quot;Return axis information for this particular unit.&quot;&quot;&quot;</span></div>
+            <span class="k">return</span> <span class="n">PintAxisInfo</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span>
 
 <div class="viewcode-block" id="PintConverter.default_units"><a class="viewcode-back" href="../../api/generated/metpy.units.PintConverter.html#metpy.units.PintConverter.default_units">[docs]</a>        <span class="nd">@staticmethod</span>
         <span class="k">def</span> <span class="nf">default_units</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Get the default unit to use for the given combination of unit and axis.&quot;&quot;&quot;</span>
-            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;units&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div></div>
+            <span class="sd">&quot;&quot;&quot;Get the default unit to use for the given combination of unit and axis.&quot;&quot;&quot;</span></div></div>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;units&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
     <span class="c1"># Register the class</span>
     <span class="n">munits</span><span class="o">.</span><span class="n">registry</span><span class="p">[</span><span class="n">units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span> <span class="o">=</span> <span class="n">PintConverter</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>
@@ -517,7 +517,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, MetPy Developers.
-      Last updated on Jan 04, 2018 at 19:17:05.
+      Last updated on Feb 22, 2018 at 17:33:12.
 
     </p>
   </div>
@@ -554,7 +554,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.6.1+116.gba13b4c',
+            VERSION:'0.7.0+56.g81d4479',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>metpy.io.nexrad &mdash; MetPy 0.6</title>
+  <title>metpy.io.nexrad &mdash; MetPy 0.7</title>
   
 
   
@@ -43,7 +43,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="MetPy 0.6" href="../../../index.html"/>
+    <link rel="top" title="MetPy 0.7" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -79,7 +79,7 @@
                 
                   <div class="version-dropdown">
                     <select class="version-list" id="version-list">
-                      <option value=''>0.6</option>
+                      <option value=''>0.7</option>
                       
                         
                           <option value="../latest">latest</option>
@@ -211,6 +211,7 @@
 
 <span class="kn">from</span> <span class="nn">._tools</span> <span class="k">import</span> <span class="p">(</span><span class="n">Array</span><span class="p">,</span> <span class="n">BitField</span><span class="p">,</span> <span class="n">Bits</span><span class="p">,</span> <span class="n">bits_to_code</span><span class="p">,</span> <span class="n">DictStruct</span><span class="p">,</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">IOBuffer</span><span class="p">,</span>
                      <span class="n">NamedStruct</span><span class="p">,</span> <span class="n">open_as_needed</span><span class="p">,</span> <span class="n">zlib_decompress_all_frames</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">..cbook</span> <span class="k">import</span> <span class="n">is_string_like</span>
 <span class="kn">from</span> <span class="nn">..package_tools</span> <span class="k">import</span> <span class="n">Exporter</span>
 
 <span class="n">exporter</span> <span class="o">=</span> <span class="n">Exporter</span><span class="p">(</span><span class="nb">globals</span><span class="p">())</span>
@@ -381,8 +382,8 @@
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="o">.</span><span class="n">jump_to</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
 
-        <span class="c1"># Now we&#39;re all initialized, we can proceed with reading in data</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_read_data</span><span class="p">()</span></div>
+        <span class="c1"># Now we&#39;re all initialized, we can proceed with reading in data</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_read_data</span><span class="p">()</span>
 
     <span class="n">vol_hdr_fmt</span> <span class="o">=</span> <span class="n">NamedStruct</span><span class="p">([(</span><span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="s1">&#39;9s&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;vol_num&#39;</span><span class="p">,</span> <span class="s1">&#39;3s&#39;</span><span class="p">),</span>
                                <span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;time_ms&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;stid&#39;</span><span class="p">,</span> <span class="s1">&#39;4s&#39;</span><span class="p">)],</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;VolHdr&#39;</span><span class="p">)</span>
@@ -833,8 +834,8 @@
 
     <span class="k">def</span> <span class="nf">_check_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg_hdr</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
         <span class="n">hdr_size</span> <span class="o">=</span> <span class="n">msg_hdr</span><span class="o">.</span><span class="n">size_hw</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">msg_hdr_fmt</span><span class="o">.</span><span class="n">size</span>
-        <span class="k">assert</span> <span class="n">size</span> <span class="o">==</span> <span class="n">hdr_size</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;Message type </span><span class="si">{}</span><span class="s1"> should be </span><span class="si">{}</span><span class="s1"> bytes &#39;</span>
-                                  <span class="s1">&#39;but got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg_hdr</span><span class="o">.</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">hdr_size</span><span class="p">))</span></div>
+        <span class="k">assert</span> <span class="n">size</span> <span class="o">==</span> <span class="n">hdr_size</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;Message type </span><span class="si">{}</span><span class="s1"> should be </span><span class="si">{}</span><span class="s1"> bytes &#39;</span></div>
+                                  <span class="s1">&#39;but got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg_hdr</span><span class="o">.</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">hdr_size</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">reduce_lists</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
@@ -1727,6 +1728,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">fobj</span> <span class="o">=</span> <span class="n">open_as_needed</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span> <span class="k">if</span> <span class="n">is_string_like</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;No File&#39;</span>
 
         <span class="c1"># Just read in the entire set of data at once</span>
         <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">closing</span><span class="p">(</span><span class="n">fobj</span><span class="p">):</span>
@@ -1850,8 +1852,8 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_unpack_tabblock</span><span class="p">(</span><span class="n">msg_start</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">prod_desc</span><span class="o">.</span><span class="n">tab_off</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="s1">&#39;defaultVals&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">:</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: Using default metadata for product </span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">code</span><span class="p">)</span></div>
+            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: Using default metadata for product </span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span></div>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">code</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_process_wmo_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Read off the WMO header if necessary</span>
@@ -1880,8 +1882,8 @@
 
 <div class="viewcode-block" id="Level3File.pos_scale"><a class="viewcode-back" href="../../../api/generated/metpy.io.Level3File.html#metpy.io.Level3File.pos_scale">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">pos_scale</span><span class="p">(</span><span class="n">is_sym_block</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Scale of the position information in km.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="mf">0.25</span> <span class="k">if</span> <span class="n">is_sym_block</span> <span class="k">else</span> <span class="mi">1</span></div>
+        <span class="sd">&quot;&quot;&quot;Scale of the position information in km.&quot;&quot;&quot;</span></div>
+        <span class="k">return</span> <span class="mf">0.25</span> <span class="k">if</span> <span class="n">is_sym_block</span> <span class="k">else</span> <span class="mi">1</span>
 
     <span class="k">def</span> <span class="nf">_unpack_rcm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="o">.</span><span class="n">jump_to</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">offset</span><span class="p">)</span>
@@ -2346,8 +2348,8 @@
                   <span class="mi">29</span><span class="p">:</span> <span class="n">_unpack_packet_generic</span><span class="p">,</span>
                   <span class="mh">0x0802</span><span class="p">:</span> <span class="n">_unpack_packet_contour_color</span><span class="p">,</span>
                   <span class="mh">0x0E03</span><span class="p">:</span> <span class="n">_unpack_packet_linked_contour</span><span class="p">,</span>
-                  <span class="mh">0xaf1f</span><span class="p">:</span> <span class="n">_unpack_packet_radial_data</span><span class="p">,</span>
-                  <span class="mh">0xba07</span><span class="p">:</span> <span class="n">_unpack_packet_raster_data</span><span class="p">}</span></div>
+                  <span class="mh">0xaf1f</span><span class="p">:</span> <span class="n">_unpack_packet_radial_data</span><span class="p">,</span></div>
+                  <span class="mh">0xba07</span><span class="p">:</span> <span class="n">_unpack_packet_raster_data</span><span class="p">}</span>
 
 
 <span class="k">class</span> <span class="nc">Level3XDRParser</span><span class="p">(</span><span class="n">Unpacker</span><span class="p">):</span>
@@ -2490,8 +2492,8 @@
 <span class="sd">    bool</span>
 <span class="sd">        True if the VCP corresponds to precipitation mode, False otherwise</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="ow">not</span> <span class="n">vcp_num</span> <span class="o">//</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">3</span></div>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+    <span class="k">return</span> <span class="ow">not</span> <span class="n">vcp_num</span> <span class="o">//</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">3</span>
 </pre></div>
 
            </div>
@@ -2507,7 +2509,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, MetPy Developers.
-      Last updated on Jan 04, 2018 at 19:17:05.
+      Last updated on Feb 22, 2018 at 17:33:12.
 
     </p>
   </div>
@@ -2544,7 +2546,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.6.1+116.gba13b4c',
+            VERSION:'0.7.0+56.g81d4479',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

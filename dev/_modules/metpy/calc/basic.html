@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>metpy.calc.basic &mdash; MetPy 0.6</title>
+  <title>metpy.calc.basic &mdash; MetPy 0.7</title>
   
 
   
@@ -43,7 +43,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="MetPy 0.6" href="../../../index.html"/>
+    <link rel="top" title="MetPy 0.7" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -79,7 +79,7 @@
                 
                   <div class="version-dropdown">
                     <select class="version-list" id="version-list">
-                      <option value=''>0.6</option>
+                      <option value=''>0.7</option>
                       
                         
                           <option value="../latest">latest</option>
@@ -235,8 +235,8 @@
 <span class="sd">    get_wind_components</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">speed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">u</span> <span class="o">*</span> <span class="n">u</span> <span class="o">+</span> <span class="n">v</span> <span class="o">*</span> <span class="n">v</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">speed</span></div>
+    <span class="n">speed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">u</span> <span class="o">*</span> <span class="n">u</span> <span class="o">+</span> <span class="n">v</span> <span class="o">*</span> <span class="n">v</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">speed</span>
 
 
 <div class="viewcode-block" id="get_wind_dir"><a class="viewcode-back" href="../../../api/generated/metpy.calc.get_wind_dir.html#metpy.calc.get_wind_dir">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -264,8 +264,8 @@
     <span class="n">wdir</span> <span class="o">=</span> <span class="mf">90.</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">deg</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="o">-</span><span class="n">v</span><span class="p">,</span> <span class="o">-</span><span class="n">u</span><span class="p">)</span>
     <span class="n">origshape</span> <span class="o">=</span> <span class="n">wdir</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">wdir</span> <span class="o">=</span> <span class="n">atleast_1d</span><span class="p">(</span><span class="n">wdir</span><span class="p">)</span>
-    <span class="n">wdir</span><span class="p">[</span><span class="n">wdir</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">360.</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">deg</span>
-    <span class="k">return</span> <span class="n">wdir</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">origshape</span><span class="p">)</span></div>
+    <span class="n">wdir</span><span class="p">[</span><span class="n">wdir</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">360.</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">deg</span></div>
+    <span class="k">return</span> <span class="n">wdir</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">origshape</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="get_wind_components"><a class="viewcode-back" href="../../../api/generated/metpy.calc.get_wind_components.html#metpy.calc.get_wind_components">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -301,8 +301,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">wdir</span> <span class="o">=</span> <span class="n">_check_radians</span><span class="p">(</span><span class="n">wdir</span><span class="p">,</span> <span class="n">max_radians</span><span class="o">=</span><span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
     <span class="n">u</span> <span class="o">=</span> <span class="o">-</span><span class="n">speed</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">wdir</span><span class="p">)</span>
-    <span class="n">v</span> <span class="o">=</span> <span class="o">-</span><span class="n">speed</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">wdir</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span></div>
+    <span class="n">v</span> <span class="o">=</span> <span class="o">-</span><span class="n">speed</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">wdir</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span>
 
 
 <div class="viewcode-block" id="windchill"><a class="viewcode-back" href="../../../api/generated/metpy.calc.windchill.html#metpy.calc.windchill">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -362,8 +362,8 @@
         <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">temperature</span> <span class="o">&gt;</span> <span class="n">temp_limit</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">speed</span> <span class="o">&lt;=</span> <span class="n">speed_limit</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">mask</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
             <span class="n">wcti</span> <span class="o">=</span> <span class="n">masked_array</span><span class="p">(</span><span class="n">wcti</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">wcti</span></div>
+</div>
+    <span class="k">return</span> <span class="n">wcti</span>
 
 
 <div class="viewcode-block" id="heat_index"><a class="viewcode-back" href="../../../api/generated/metpy.calc.heat_index.html#metpy.calc.heat_index">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -416,8 +416,8 @@
         <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">temperature</span> <span class="o">&lt;</span> <span class="mf">80.</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">degF</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">rh</span> <span class="o">&lt;</span> <span class="mi">40</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">percent</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">mask</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
             <span class="n">hi</span> <span class="o">=</span> <span class="n">masked_array</span><span class="p">(</span><span class="n">hi</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">hi</span></div>
+</div>
+    <span class="k">return</span> <span class="n">hi</span>
 
 
 <div class="viewcode-block" id="pressure_to_height_std"><a class="viewcode-back" href="../../../api/generated/metpy.calc.pressure_to_height_std.html#metpy.calc.pressure_to_height_std">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -444,8 +444,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="mf">288.</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">kelvin</span>
     <span class="n">gamma</span> <span class="o">=</span> <span class="mf">6.5</span> <span class="o">*</span> <span class="n">units</span><span class="p">(</span><span class="s1">&#39;K/km&#39;</span><span class="p">)</span>
-    <span class="n">p0</span> <span class="o">=</span> <span class="mf">1013.25</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">mbar</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">t0</span> <span class="o">/</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">pressure</span> <span class="o">/</span> <span class="n">p0</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">Rd</span> <span class="o">*</span> <span class="n">gamma</span> <span class="o">/</span> <span class="n">g</span><span class="p">))</span></div>
+    <span class="n">p0</span> <span class="o">=</span> <span class="mf">1013.25</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">mbar</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">t0</span> <span class="o">/</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">pressure</span> <span class="o">/</span> <span class="n">p0</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">Rd</span> <span class="o">*</span> <span class="n">gamma</span> <span class="o">/</span> <span class="n">g</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="height_to_geopotential"><a class="viewcode-back" href="../../../api/generated/metpy.calc.height_to_geopotential.html#metpy.calc.height_to_geopotential">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -482,8 +482,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Calculate geopotential</span>
     <span class="n">geopot</span> <span class="o">=</span> <span class="n">G</span> <span class="o">*</span> <span class="n">me</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Re</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">Re</span> <span class="o">+</span> <span class="n">height</span><span class="p">)))</span>
-
-    <span class="k">return</span> <span class="n">geopot</span></div>
+</div>
+    <span class="k">return</span> <span class="n">geopot</span>
 
 
 <div class="viewcode-block" id="geopotential_to_height"><a class="viewcode-back" href="../../../api/generated/metpy.calc.geopotential_to_height.html#metpy.calc.geopotential_to_height">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -523,8 +523,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Calculate geopotential</span>
     <span class="n">height</span> <span class="o">=</span> <span class="p">(((</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Re</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">geopot</span> <span class="o">/</span> <span class="p">(</span><span class="n">G</span> <span class="o">*</span> <span class="n">me</span><span class="p">)))</span> <span class="o">**</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">Re</span>
-
-    <span class="k">return</span> <span class="n">height</span></div>
+</div>
+    <span class="k">return</span> <span class="n">height</span>
 
 
 <div class="viewcode-block" id="height_to_pressure_std"><a class="viewcode-back" href="../../../api/generated/metpy.calc.height_to_pressure_std.html#metpy.calc.height_to_pressure_std">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -551,8 +551,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="mf">288.</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">kelvin</span>
     <span class="n">gamma</span> <span class="o">=</span> <span class="mf">6.5</span> <span class="o">*</span> <span class="n">units</span><span class="p">(</span><span class="s1">&#39;K/km&#39;</span><span class="p">)</span>
-    <span class="n">p0</span> <span class="o">=</span> <span class="mf">1013.25</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">mbar</span>
-    <span class="k">return</span> <span class="n">p0</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">/</span> <span class="n">t0</span><span class="p">)</span> <span class="o">*</span> <span class="n">height</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">g</span> <span class="o">/</span> <span class="p">(</span><span class="n">Rd</span> <span class="o">*</span> <span class="n">gamma</span><span class="p">))</span></div>
+    <span class="n">p0</span> <span class="o">=</span> <span class="mf">1013.25</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">mbar</span></div>
+    <span class="k">return</span> <span class="n">p0</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">/</span> <span class="n">t0</span><span class="p">)</span> <span class="o">*</span> <span class="n">height</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">g</span> <span class="o">/</span> <span class="p">(</span><span class="n">Rd</span> <span class="o">*</span> <span class="n">gamma</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="coriolis_parameter"><a class="viewcode-back" href="../../../api/generated/metpy.calc.coriolis_parameter.html#metpy.calc.coriolis_parameter">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -572,8 +572,8 @@
 <span class="sd">        The corresponding coriolis force at each point</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">latitude</span> <span class="o">=</span> <span class="n">_check_radians</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">max_radians</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">omega</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span></div>
+    <span class="n">latitude</span> <span class="o">=</span> <span class="n">_check_radians</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">max_radians</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">omega</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="add_height_to_pressure"><a class="viewcode-back" href="../../../api/generated/metpy.calc.add_height_to_pressure.html#metpy.calc.add_height_to_pressure">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -600,8 +600,8 @@
 <span class="sd">    pressure_to_height_std, height_to_pressure_std, add_pressure_to_height</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">pressure_level_height</span> <span class="o">=</span> <span class="n">pressure_to_height_std</span><span class="p">(</span><span class="n">pressure</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">height_to_pressure_std</span><span class="p">(</span><span class="n">pressure_level_height</span> <span class="o">+</span> <span class="n">height</span><span class="p">)</span></div>
+    <span class="n">pressure_level_height</span> <span class="o">=</span> <span class="n">pressure_to_height_std</span><span class="p">(</span><span class="n">pressure</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">height_to_pressure_std</span><span class="p">(</span><span class="n">pressure_level_height</span> <span class="o">+</span> <span class="n">height</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="add_pressure_to_height"><a class="viewcode-back" href="../../../api/generated/metpy.calc.add_pressure_to_height.html#metpy.calc.add_pressure_to_height">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -628,8 +628,8 @@
 <span class="sd">    pressure_to_height_std, height_to_pressure_std, add_height_to_pressure</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">pressure_at_height</span> <span class="o">=</span> <span class="n">height_to_pressure_std</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">pressure_to_height_std</span><span class="p">(</span><span class="n">pressure_at_height</span> <span class="o">-</span> <span class="n">pressure</span><span class="p">)</span></div>
+    <span class="n">pressure_at_height</span> <span class="o">=</span> <span class="n">height_to_pressure_std</span><span class="p">(</span><span class="n">height</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">pressure_to_height_std</span><span class="p">(</span><span class="n">pressure_at_height</span> <span class="o">-</span> <span class="n">pressure</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="sigma_to_pressure"><a class="viewcode-back" href="../../../api/generated/metpy.calc.sigma_to_pressure.html#metpy.calc.sigma_to_pressure">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -670,8 +670,8 @@
 
     <span class="k">if</span> <span class="n">psfc</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">ptop</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Pressure input should be non-negative&#39;</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">sigma</span> <span class="o">*</span> <span class="p">(</span><span class="n">psfc</span> <span class="o">-</span> <span class="n">ptop</span><span class="p">)</span> <span class="o">+</span> <span class="n">ptop</span></div>
+</div>
+    <span class="k">return</span> <span class="n">sigma</span> <span class="o">*</span> <span class="p">(</span><span class="n">psfc</span> <span class="o">-</span> <span class="n">ptop</span><span class="p">)</span> <span class="o">+</span> <span class="n">ptop</span>
 
 
 <span class="k">def</span> <span class="nf">_check_radians</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">max_radians</span><span class="o">=</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">):</span>
@@ -714,7 +714,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, MetPy Developers.
-      Last updated on Jan 04, 2018 at 19:17:05.
+      Last updated on Feb 22, 2018 at 17:33:12.
 
     </p>
   </div>
@@ -751,7 +751,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.6.1+116.gba13b4c',
+            VERSION:'0.7.0+56.g81d4479',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

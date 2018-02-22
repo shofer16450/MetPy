@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>metpy.calc.kinematics &mdash; MetPy 0.6</title>
+  <title>metpy.calc.kinematics &mdash; MetPy 0.7</title>
   
 
   
@@ -43,7 +43,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="MetPy 0.6" href="../../../index.html"/>
+    <link rel="top" title="MetPy 0.7" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -79,7 +79,7 @@
                 
                   <div class="version-dropdown">
                     <select class="version-list" id="version-list">
-                      <option value=''>0.6</option>
+                      <option value=''>0.7</option>
                       
                         
                           <option value="../latest">latest</option>
@@ -307,16 +307,16 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dudy</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">dvdx</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">dvdx</span> <span class="o">-</span> <span class="n">dudy</span></div>
+    <span class="n">dvdx</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">dvdx</span> <span class="o">-</span> <span class="n">dudy</span>
 
 
 <div class="viewcode-block" id="v_vorticity"><a class="viewcode-back" href="../../../api/generated/metpy.calc.v_vorticity.html#metpy.calc.v_vorticity">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
 <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;0.7&#39;</span><span class="p">,</span> <span class="n">addendum</span><span class="o">=</span><span class="s1">&#39; This function has been renamed vorticity.&#39;</span><span class="p">,</span>
             <span class="n">pending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">v_vorticity</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dim_order</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wrap vorticity for deprecated v_vorticity function.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">vorticity</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dim_order</span><span class="o">=</span><span class="n">dim_order</span><span class="p">)</span></div>
+    <span class="sd">&quot;&quot;&quot;Wrap vorticity for deprecated v_vorticity function.&quot;&quot;&quot;</span></div>
+    <span class="k">return</span> <span class="n">vorticity</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dim_order</span><span class="o">=</span><span class="n">dim_order</span><span class="p">)</span>
 
 
 <span class="n">v_vorticity</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="p">(</span><span class="n">vorticity</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">+</span>
@@ -351,16 +351,16 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dudx</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">dvdy</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">dudx</span> <span class="o">+</span> <span class="n">dvdy</span></div>
+    <span class="n">dvdy</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">dudx</span> <span class="o">+</span> <span class="n">dvdy</span>
 
 
 <div class="viewcode-block" id="h_convergence"><a class="viewcode-back" href="../../../api/generated/metpy.calc.h_convergence.html#metpy.calc.h_convergence">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
 <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;0.7&#39;</span><span class="p">,</span> <span class="n">addendum</span><span class="o">=</span><span class="s1">&#39; This function has been replaced by divergence.&#39;</span><span class="p">,</span>
             <span class="n">pending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">h_convergence</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dim_order</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wrap divergence for deprecated convergence function.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">divergence</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dim_order</span><span class="o">=</span><span class="n">dim_order</span><span class="p">)</span></div>
+    <span class="sd">&quot;&quot;&quot;Wrap divergence for deprecated convergence function.&quot;&quot;&quot;</span></div>
+    <span class="k">return</span> <span class="n">divergence</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dim_order</span><span class="o">=</span><span class="n">dim_order</span><span class="p">)</span>
 
 
 <span class="n">h_convergence</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="p">(</span><span class="n">divergence</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">+</span>
@@ -404,8 +404,8 @@
     <span class="n">dudx</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">dudy</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">dvdx</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">dvdy</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">dudx</span> <span class="o">+</span> <span class="n">dvdy</span><span class="p">,</span> <span class="n">dvdx</span> <span class="o">-</span> <span class="n">dudy</span></div>
+    <span class="n">dvdy</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">dudx</span> <span class="o">+</span> <span class="n">dvdy</span><span class="p">,</span> <span class="n">dvdx</span> <span class="o">-</span> <span class="n">dudy</span>
 
 
 <div class="viewcode-block" id="shearing_deformation"><a class="viewcode-back" href="../../../api/generated/metpy.calc.shearing_deformation.html#metpy.calc.shearing_deformation">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -435,8 +435,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dudy</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">dvdx</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">dvdx</span> <span class="o">+</span> <span class="n">dudy</span></div>
+    <span class="n">dvdx</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">dvdx</span> <span class="o">+</span> <span class="n">dudy</span>
 
 
 <div class="viewcode-block" id="stretching_deformation"><a class="viewcode-back" href="../../../api/generated/metpy.calc.stretching_deformation.html#metpy.calc.stretching_deformation">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -466,8 +466,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dudx</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">dvdy</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">dudx</span> <span class="o">-</span> <span class="n">dvdy</span></div>
+    <span class="n">dvdy</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">dudx</span> <span class="o">-</span> <span class="n">dvdy</span>
 
 
 <div class="viewcode-block" id="shearing_stretching_deformation"><a class="viewcode-back" href="../../../api/generated/metpy.calc.shearing_stretching_deformation.html#metpy.calc.shearing_stretching_deformation">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -507,8 +507,8 @@
     <span class="n">dudx</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">dudy</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">dvdx</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">dvdy</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">dvdx</span> <span class="o">+</span> <span class="n">dudy</span><span class="p">,</span> <span class="n">dudx</span> <span class="o">-</span> <span class="n">dvdy</span></div>
+    <span class="n">dvdy</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">dvdx</span> <span class="o">+</span> <span class="n">dudy</span><span class="p">,</span> <span class="n">dudx</span> <span class="o">-</span> <span class="n">dvdy</span>
 
 
 <div class="viewcode-block" id="total_deformation"><a class="viewcode-back" href="../../../api/generated/metpy.calc.total_deformation.html#metpy.calc.total_deformation">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -540,8 +540,8 @@
     <span class="n">dudx</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">dudy</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">dvdx</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">dvdy</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">dvdx</span> <span class="o">+</span> <span class="n">dudy</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">dudx</span> <span class="o">-</span> <span class="n">dvdy</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></div>
+    <span class="n">dvdy</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">dvdx</span> <span class="o">+</span> <span class="n">dudy</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">dudx</span> <span class="o">-</span> <span class="n">dvdy</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="advection"><a class="viewcode-back" href="../../../api/generated/metpy.calc.advection.html#metpy.calc.advection">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -589,8 +589,8 @@
     <span class="c1"># Make them be at least 2D (handling the 1D case) so that we can do the</span>
     <span class="c1"># multiply and sum below</span>
     <span class="n">grad</span><span class="p">,</span> <span class="n">wind</span> <span class="o">=</span> <span class="n">atleast_2d</span><span class="p">(</span><span class="n">grad</span><span class="p">,</span> <span class="n">wind</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="n">grad</span> <span class="o">*</span> <span class="n">wind</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
+</div>
+    <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="n">grad</span> <span class="o">*</span> <span class="n">wind</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="frontogenesis"><a class="viewcode-back" href="../../../api/generated/metpy.calc.frontogenesis.html#metpy.calc.frontogenesis">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -653,8 +653,8 @@
     <span class="c1"># Compute the angle (beta) between the wind field and the gradient of potential temperature</span>
     <span class="n">psi</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">shrd</span><span class="p">,</span> <span class="n">strd</span><span class="p">)</span>
     <span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">((</span><span class="o">-</span><span class="n">ddx_thta</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span> <span class="o">-</span> <span class="n">ddy_thta</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">psi</span><span class="p">))</span> <span class="o">/</span> <span class="n">mag_thta</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">mag_thta</span> <span class="o">*</span> <span class="p">(</span><span class="n">tdef</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">beta</span><span class="p">)</span> <span class="o">-</span> <span class="n">div</span><span class="p">)</span></div>
+</div>
+    <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">mag_thta</span> <span class="o">*</span> <span class="p">(</span><span class="n">tdef</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">beta</span><span class="p">)</span> <span class="o">-</span> <span class="n">div</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="geostrophic_wind"><a class="viewcode-back" href="../../../api/generated/metpy.calc.geostrophic_wind.html#metpy.calc.geostrophic_wind">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -687,8 +687,42 @@
         <span class="n">norm_factor</span> <span class="o">=</span> <span class="n">g</span> <span class="o">/</span> <span class="n">f</span>
 
     <span class="n">dhdy</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">dhdx</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="o">-</span><span class="n">norm_factor</span> <span class="o">*</span> <span class="n">dhdy</span><span class="p">,</span> <span class="n">norm_factor</span> <span class="o">*</span> <span class="n">dhdx</span></div>
+    <span class="n">dhdx</span> <span class="o">=</span> <span class="n">first_derivative</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">dx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="o">-</span><span class="n">norm_factor</span> <span class="o">*</span> <span class="n">dhdy</span><span class="p">,</span> <span class="n">norm_factor</span> <span class="o">*</span> <span class="n">dhdx</span>
+
+
+<div class="viewcode-block" id="ageostrophic_wind"><a class="viewcode-back" href="../../../api/generated/metpy.calc.ageostrophic_wind.html#metpy.calc.ageostrophic_wind">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
+<span class="nd">@ensure_yx_order</span>
+<span class="k">def</span> <span class="nf">ageostrophic_wind</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dim_order</span><span class="o">=</span><span class="s1">&#39;yx&#39;</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calculate the ageostrophic wind given from the heights or geopotential.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    heights : (M, N) ndarray</span>
+<span class="sd">        The height field, with either leading dimensions of (x, y) or trailing dimensions</span>
+<span class="sd">        of (y, x), depending on the value of ``dim_order``.</span>
+<span class="sd">    f : array_like</span>
+<span class="sd">        The coriolis parameter.  This can be a scalar to be applied</span>
+<span class="sd">        everywhere or an array of values.</span>
+<span class="sd">    dx : scalar</span>
+<span class="sd">        The grid spacing in the x-direction</span>
+<span class="sd">    dy : scalar</span>
+<span class="sd">        The grid spacing in the y-direction</span>
+<span class="sd">    u : (M, N) ndarray</span>
+<span class="sd">        The u wind field, with either leading dimensions of (x, y) or trailing dimensions</span>
+<span class="sd">        of (y, x), depending on the value of ``dim_order``.</span>
+<span class="sd">    v : (M, N) ndarray</span>
+<span class="sd">        The u wind field, with either leading dimensions of (x, y) or trailing dimensions</span>
+<span class="sd">        of (y, x), depending on the value of ``dim_order``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A 2-item tuple of arrays</span>
+<span class="sd">        A tuple of the u-component and v-component of the ageostrophic wind.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">u_geostrophic</span><span class="p">,</span> <span class="n">v_geostrophic</span> <span class="o">=</span> <span class="n">geostrophic_wind</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dim_order</span><span class="o">=</span><span class="n">dim_order</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">u</span> <span class="o">-</span> <span class="n">u_geostrophic</span><span class="p">,</span> <span class="n">v</span> <span class="o">-</span> <span class="n">v_geostrophic</span>
 
 
 <div class="viewcode-block" id="montgomery_streamfunction"><a class="viewcode-back" href="../../../api/generated/metpy.calc.montgomery_streamfunction.html#metpy.calc.montgomery_streamfunction">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -726,8 +760,8 @@
 <span class="sd">    --------</span>
 <span class="sd">    get_isentropic_pressure</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">g</span> <span class="o">*</span> <span class="n">height</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">Cp_d</span> <span class="o">*</span> <span class="n">temperature</span><span class="p">)</span></div>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">g</span> <span class="o">*</span> <span class="n">height</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">Cp_d</span> <span class="o">*</span> <span class="n">temperature</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="storm_relative_helicity"><a class="viewcode-back" href="../../../api/generated/metpy.calc.storm_relative_helicity.html#metpy.calc.storm_relative_helicity">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
@@ -782,11 +816,15 @@
     <span class="n">negative_srh</span> <span class="o">=</span> <span class="n">int_layers</span><span class="p">[</span><span class="n">int_layers</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="n">positive_srh</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;meter ** 2 / second ** 2&#39;</span><span class="p">),</span>
-            <span class="n">negative_srh</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;meter ** 2 / second ** 2&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">positive_srh</span> <span class="o">+</span> <span class="n">negative_srh</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;meter ** 2 / second ** 2&#39;</span><span class="p">))</span></div>
+            <span class="n">negative_srh</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;meter ** 2 / second ** 2&#39;</span><span class="p">),</span></div>
+            <span class="p">(</span><span class="n">positive_srh</span> <span class="o">+</span> <span class="n">negative_srh</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;meter ** 2 / second ** 2&#39;</span><span class="p">))</span>
 
 
-<div class="viewcode-block" id="lat_lon_grid_spacing"><a class="viewcode-back" href="../../../api/generated/metpy.calc.lat_lon_grid_spacing.html#metpy.calc.lat_lon_grid_spacing">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
+<div class="viewcode-block" id="lat_lon_grid_spacing"><a class="viewcode-back" href="../../../api/generated/metpy.calc.lat_lon_grid_spacing.html#metpy.calc.lat_lon_grid_spacing">[docs]</a><span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;0.8&#39;</span><span class="p">,</span> <span class="n">addendum</span><span class="o">=</span><span class="s1">&#39; This function has been replaced by the signed delta distance&#39;</span>
+                            <span class="s1">&#39;calculation lat_lon_grid_deltas and will be removed in MetPy&#39;</span>
+                            <span class="s1">&#39; 0.11.&#39;</span><span class="p">,</span>
+            <span class="n">pending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
 <span class="k">def</span> <span class="nf">lat_lon_grid_spacing</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calculate the distance between grid points that are in a latitude/longitude format.</span>
 
@@ -811,6 +849,42 @@
 <span class="sd">    Accepts, 1D or 2D arrays for latitude and longitude</span>
 <span class="sd">    Assumes [Y, X] for 2D arrays</span>
 
+<span class="sd">    .. deprecated:: 0.8.0</span>
+<span class="sd">        Function has been replaced with the signed delta distance calculation</span>
+<span class="sd">        `lat_lon_grid_deltas` and will be removed from MetPy in 0.11.0.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Use the absolute value of the signed function replacing this</span>
+    <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="n">lat_lon_grid_deltas</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</div>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dx</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="lat_lon_grid_deltas"><a class="viewcode-back" href="../../../api/generated/metpy.calc.lat_lon_grid_deltas.html#metpy.calc.lat_lon_grid_deltas">[docs]</a><span class="nd">@exporter</span><span class="o">.</span><span class="n">export</span>
+<span class="k">def</span> <span class="nf">lat_lon_grid_deltas</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calculate the delta between grid points that are in a latitude/longitude format.</span>
+
+<span class="sd">    Calculate the signed delta distance between grid points when the grid spacing is defined by</span>
+<span class="sd">    delta lat/lon rather than delta x/y</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    longitude : array_like</span>
+<span class="sd">        array of longitudes defining the grid</span>
+<span class="sd">    latitude : array_like</span>
+<span class="sd">        array of latitudes defining the grid</span>
+<span class="sd">    kwargs</span>
+<span class="sd">        Other keyword arguments to pass to :class:`~pyproj.Geod`</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">     dx, dy: 2D arrays of signed deltas between grid points in the x and y direction</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Accepts, 1D or 2D arrays for latitude and longitude</span>
+<span class="sd">    Assumes [Y, X] for 2D arrays</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Inputs must be the same number of dimensions</span>
     <span class="k">if</span> <span class="n">latitude</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="n">longitude</span><span class="o">.</span><span class="n">ndim</span><span class="p">:</span>
@@ -824,10 +898,15 @@
     <span class="n">geod_args</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">Geod</span><span class="p">(</span><span class="o">**</span><span class="n">geod_args</span><span class="p">)</span>
 
-    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">longitude</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">latitude</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">longitude</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:],</span> <span class="n">latitude</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:])</span>
-    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">dx</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">longitude</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">latitude</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">longitude</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">latitude</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:])</span>
+    <span class="n">forward_az</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">longitude</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">latitude</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">longitude</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:],</span>
+                              <span class="n">latitude</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:])</span>
+    <span class="n">dy</span><span class="p">[(</span><span class="n">forward_az</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">90.</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">forward_az</span> <span class="o">&gt;</span> <span class="mf">90.</span><span class="p">)]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
 
-    <span class="k">return</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">meter</span><span class="p">,</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">meter</span></div>
+    <span class="n">forward_az</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">dx</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">longitude</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">latitude</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">longitude</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span>
+                              <span class="n">latitude</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:])</span>
+    <span class="n">dx</span><span class="p">[(</span><span class="n">forward_az</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">forward_az</span> <span class="o">&gt;</span> <span class="mf">180.</span><span class="p">)]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+</div>
+    <span class="k">return</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">meter</span><span class="p">,</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">meter</span>
 </pre></div>
 
            </div>
@@ -843,7 +922,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, MetPy Developers.
-      Last updated on Jan 04, 2018 at 19:17:05.
+      Last updated on Feb 22, 2018 at 17:33:12.
 
     </p>
   </div>
@@ -880,7 +959,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.6.1+116.gba13b4c',
+            VERSION:'0.7.0+56.g81d4479',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
